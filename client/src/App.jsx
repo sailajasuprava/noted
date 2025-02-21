@@ -7,6 +7,8 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import { useAuth } from "./context/AuthContext";
+import CreateBlog from "./pages/CreateBlog";
+import Profile from "./pages/Profile";
 
 function App() {
   const { auth } = useAuth();
@@ -24,6 +26,14 @@ function App() {
           <Route
             path="/login"
             element={auth ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/write"
+            element={auth ? <CreateBlog /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={auth ? <Profile /> : <Navigate to="/login" />}
           />
 
           <Route path="*" element={<PageNotFound />} />
