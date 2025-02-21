@@ -6,6 +6,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
+const blogRouter = require("./routes/blogRoutes");
 
 const globalErrorHandler = require("./controllers/errorController");
 const AppError = require("./utils/appArror");
@@ -29,6 +30,7 @@ app.use(mongoSanitize());
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
+app.use("/api/blogs", blogRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`This route ${req.originalUrl} doesn't exist.`, 404));

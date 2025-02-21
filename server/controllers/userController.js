@@ -24,7 +24,7 @@ const getUser = async (req, res, next) => {
     const user = await User.findById(req.params.userID);
 
     if (!user) {
-      return next(new AppError("No user found with that ID", 404));
+      return next(new AppError("No user found with that Id", 404));
     }
 
     res.status(200).json({
@@ -58,7 +58,7 @@ const createUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.userID, req.body, {
+    const user = await User.findByIdAndUpdate(req.params.userId, req.body, {
       new: true,
       runValidators: true,
     });
@@ -79,7 +79,7 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.userID);
+    const user = await User.findByIdAndDelete(req.params.userId);
 
     if (!user) {
       return next(new AppError("No user found with that ID", 404));
