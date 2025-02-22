@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function BlogCard({ blog }) {
   const {
     author: { fullname },
@@ -5,11 +6,17 @@ function BlogCard({ blog }) {
     title,
     category,
     createdAt,
+    _id,
   } = blog;
+
   return (
     <div className="flex gap-10 pb-16 justify-between">
       <div className="flex-1 space-y-2">
-        <h1 className="text-2xl font-semibold capitalize">{title}</h1>
+        <Link to={`/blogs/${_id}`}>
+          <h1 className="text-2xl font-semibold capitalize hover:underline">
+            {title}
+          </h1>
+        </Link>
         <h3 className="uppercase opacity-45">{category}</h3>
         <div className="flex justify-between text-sm">
           <span>{fullname}</span>

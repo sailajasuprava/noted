@@ -39,7 +39,7 @@ const blogSchema = new mongoose.Schema(
 blogSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
-    select: "fullname email",
+    select: "fullname",
   });
   next();
 });

@@ -3,7 +3,7 @@ const AppError = require("../utils/appArror");
 
 const getAllBlogs = async (req, res, next) => {
   try {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find().select("banner title category createdAt");
 
     if (!blogs) {
       return next(new AppError("No blogs found", 404));
