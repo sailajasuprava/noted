@@ -5,13 +5,17 @@ const blogSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Title is required."],
+      lowercase: true,
+      unique: true,
       minlength: [3, "Title must be at least 3 characters long."],
       maxlength: [50, "Title must be less than 50 characters long."],
     },
-    // banner: {
-    //   type: String,
-    //   required: [true, "Banner is required"],
-    // },
+    banner: {
+      type: String,
+      required: [true, "Banner is required"],
+      default:
+        "https://images.unsplash.com/photo-1591779051696-1c3fa1469a79?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
     category: {
       type: String,
       required: [true, "Category is required."],
@@ -19,16 +23,8 @@ const blogSchema = new mongoose.Schema(
     content: {
       type: String,
       required: [true, "Content is required."],
-      minlength: [50, "Content must be at least 50 characters long."],
+      minlength: [200, "Content must be at least 200 characters long."],
     },
-    // summary: {
-    //   type: String,
-    //   required: [true, "Summary is required."],
-    //   maxlength: [200, "Summary must be less than 200 characters."],
-    // },
-    // tags: {
-    //   type: [String],
-    // },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

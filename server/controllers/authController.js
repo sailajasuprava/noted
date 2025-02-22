@@ -8,11 +8,11 @@ const generateAndSendToken = (res, id) => {
   const token = jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-  res.cookie("jwt", token, {
-    //change jwt #fff here & in protect & logout func.
+
+  res.cookie("noted", token, {
     maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "None",
+    sameSite: "strict",
     secure: process.env.NODE_ENV !== "development",
   });
 };
@@ -73,8 +73,8 @@ const logIn = async (req, res, next) => {
 const protect = async (req, res, next) => {
   try {
     let token;
-    if (req.cookies.jwt) {
-      token = req.cookies.jwt; //change jwt #fff
+    if (req.cookies.noted) {
+      token = req.cookies.noted;
     }
 
     if (!token) {
@@ -107,7 +107,7 @@ const restrictTo =
   };
 
 const logOut = (req, res) => {
-  res.cookie("jwt", "", { maxAge: 0 }); //change jwt #fff
+  res.cookie("noted", "", { maxAge: 0 });
   res.status(200).json({
     status: "success",
     message: "Logged out successfully",

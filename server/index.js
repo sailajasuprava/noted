@@ -10,7 +10,7 @@ const blogRouter = require("./routes/blogRoutes");
 
 const globalErrorHandler = require("./controllers/errorController");
 const AppError = require("./utils/appArror");
-const { connectDB } = require("./lib/db");
+const { connectDB } = require("./config/db");
 
 const port = process.env.PORT || 3000;
 const corsOptions = {
