@@ -4,21 +4,17 @@ import { FaAngleRight, FaChevronLeft } from "react-icons/fa";
 
 const categories = [
   "All",
-  "Music",
-  "Gaming",
-  "Live",
-  "News",
+  "Science",
+  "Technology",
+  "Food",
+  "Travel",
+  "Finance",
+  "Business",
+  "Movies",
+  "Fashion",
   "Sports",
-  "Learning",
-  "Podcasts",
-  "Trending",
-  "Movies",
-  "Tech",
-  "Learning",
-  "Podcasts",
-  "Trending",
-  "Movies",
-  "Tech",
+  "Social Media",
+  "Gaming",
 ];
 
 export default function FilterChipBar() {
@@ -47,9 +43,9 @@ export default function FilterChipBar() {
         ref={scrollRef}
         className="flex gap-3 overflow-x-hidden whitespace-nowrap scroll-smooth px-10"
       >
-        {categories.map((category) => (
+        {categories.map((category, i) => (
           <motion.button
-            key={category}
+            key={i}
             onClick={() => setActive(category)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition ${
               active === category

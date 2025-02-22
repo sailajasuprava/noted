@@ -28,11 +28,15 @@ function CreateBlog() {
             <option value="">Select a category</option>
             <option value="science">Science</option>
             <option value="technology">Technology</option>
+            <option value="food">Food</option>
             <option value="travel">Travel</option>
             <option value="finance">Finance</option>
+            <option value="business">Business</option>
             <option value="movies">Movies</option>
-            <option value="food">Food</option>
+            <option value="fashion">Fashion</option>
+            <option value="sports">Sports</option>
             <option value="socialmedia">Social Media</option>
+            <option value="gaming">Gaming</option>
           </select>
         </div>
 
