@@ -8,7 +8,7 @@ const blogSchema = new mongoose.Schema(
       lowercase: true,
       unique: true,
       minlength: [3, "Title must be at least 3 characters long."],
-      maxlength: [50, "Title must be less than 50 characters long."],
+      maxlength: [50, "Title must be less than 50 characters."],
     },
     banner: {
       type: String,

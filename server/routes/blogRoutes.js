@@ -10,9 +10,11 @@ const { protect } = require("../controllers/authController");
 
 const router = express.Router();
 
-router.use(protect);
-
-router.route("/").get(getAllBlogs).post(createBlog);
-router.route("/:blogId").get(getBlog).patch(updateBlog).delete(deleteBlog);
+router.route("/").get(getAllBlogs).post(protect, createBlog);
+router
+  .route("/:blogId")
+  .get(getBlog)
+  .patch(protect, updateBlog)
+  .delete(protect, deleteBlog);
 
 module.exports = router;
