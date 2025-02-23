@@ -1,6 +1,4 @@
 function CommentCard({ item }) {
-  console.log(item);
-
   const {
     comment,
     userId: { fullname },

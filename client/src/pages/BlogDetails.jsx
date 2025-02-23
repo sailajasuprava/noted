@@ -8,6 +8,8 @@ import CommentCard from "../components/CommentCard";
 
 function BlogDetails() {
   const [blog, setBlog] = useState();
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +24,20 @@ function BlogDetails() {
 
     fetchABlog();
   }, [id]);
+
+  async function handleCommentSubmit(e) {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const res = await axios.post(`/comments`, { blogId: id, comment: input });
+      setBlog({ ...blog, comments: [...blog.comments, res.data.data] });
+      setInput("");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   if (!blog) return <Spinner />;
   console.log(blog);
@@ -71,14 +87,21 @@ function BlogDetails() {
 
       <p className="text-xl font-serif leading-8">{content}</p>
 
-      <form className="border p-4 space-y-4 text-end rounded-md">
+      <form
+        className="border p-4 space-y-4 text-end rounded-md"
+        onSubmit={handleCommentSubmit}
+      >
         <textarea
           name="comment"
           placeholder="Add a comment..."
           className="input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
         ></textarea>
 
-        <button className="btn-black">Submit</button>
+        <button className="btn-black" disabled={isLoading}>
+          Submit
+        </button>
       </form>
 
       <div>

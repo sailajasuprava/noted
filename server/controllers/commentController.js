@@ -12,10 +12,15 @@ const createComment = async (req, res, next) => {
       userId: _id,
     });
 
+    const populatedComment = await Comment.findById(newComment._id).populate({
+      path: "userId",
+      select: "fullname",
+    });
+
     res.status(201).json({
       status: "success",
       message: "Comment created successfully",
-      data: newComment,
+      data: populatedComment,
     });
   } catch (err) {
     next(err);
