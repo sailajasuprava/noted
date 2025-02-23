@@ -19,7 +19,14 @@ function BlogCard({ blog }) {
         </Link>
         <h3 className="uppercase opacity-45">{category}</h3>
         <div className="flex justify-between text-sm">
-          <span>{fullname}</span>
+          <div className="flex gap-2 items-center">
+            <img
+              src="/defaultUser.png"
+              alt="profilePic"
+              className="h-8 w-8 rounded-full object-cover"
+            />
+            <span>{fullname}</span>
+          </div>
           <span>{createdAt.split("T")[0]}</span>
         </div>
       </div>
