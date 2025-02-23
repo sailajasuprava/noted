@@ -4,6 +4,7 @@ import axios from "../lib/axios";
 import Spinner from "../components/Spinner";
 import { useParams } from "react-router-dom";
 import { IoIosHeartEmpty } from "react-icons/io";
+import CommentCard from "../components/CommentCard";
 
 function BlogDetails() {
   const [blog, setBlog] = useState();
@@ -30,6 +31,7 @@ function BlogDetails() {
     banner,
     title,
     content,
+    comments,
     createdAt,
   } = blog;
 
@@ -68,6 +70,24 @@ function BlogDetails() {
       </div>
 
       <p className="text-xl font-serif leading-8">{content}</p>
+
+      <form className="border p-4 space-y-4 text-end rounded-md">
+        <textarea
+          name="comment"
+          placeholder="Add a comment..."
+          className="input"
+        ></textarea>
+
+        <button className="btn-black">Submit</button>
+      </form>
+
+      <div>
+        <h1 className="text-2xl font-bold">Comments ({comments.length})</h1>
+
+        {comments.map((item, i) => (
+          <CommentCard key={i} item={item} />
+        ))}
+      </div>
     </div>
   );
 }

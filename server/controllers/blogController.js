@@ -21,7 +21,10 @@ const getAllBlogs = async (req, res, next) => {
 
 const getBlog = async (req, res, next) => {
   try {
-    const blog = await Blog.findById(req.params.blogId);
+    const blog = await Blog.findById(req.params.blogId).populate({
+      path: "comments",
+      select: "comment createdAt userId",
+    });
 
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));

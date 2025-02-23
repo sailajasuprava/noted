@@ -33,8 +33,16 @@ const blogSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+blogSchema.virtual("comments", {
+  ref: "Comment",
+  foreignField: "blogId",
+  localField: "_id",
+});
 
 blogSchema.pre(/^find/, function (next) {
   this.populate({
