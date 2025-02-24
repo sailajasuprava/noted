@@ -98,4 +98,40 @@ const deleteBlog = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllBlogs, getBlog, createBlog, updateBlog, deleteBlog };
+const likeBlog = async (req, res, next) => {
+  try {
+    const blog = await Blog.findById(req.params.blogId);
+
+    if (!blog) {
+      return next(new AppError("No blog found with that ID", 404));
+    }
+
+    const userIndex = blog.likes.indexOf(req.user._id);
+
+    if (userIndex === -1) {
+      blog.numOfLikes += 1;
+      blog.likes.push(req.user._id);
+    } else {
+      blog.numOfLikes -= 1;
+      blog.likes.splice(userIndex, 1);
+    }
+
+    await blog.save();
+
+    res.status(200).json({
+      status: "success",
+      data: blog,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  getAllBlogs,
+  getBlog,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+  likeBlog,
+};

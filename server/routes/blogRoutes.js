@@ -5,6 +5,7 @@ const {
   getBlog,
   updateBlog,
   deleteBlog,
+  likeBlog,
 } = require("../controllers/blogController");
 const { protect } = require("../controllers/authController");
 
@@ -16,5 +17,5 @@ router
   .get(getBlog)
   .patch(protect, updateBlog)
   .delete(protect, deleteBlog);
-
+router.route("/like/:blogId").patch(protect, likeBlog);
 module.exports = router;

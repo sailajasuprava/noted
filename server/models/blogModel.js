@@ -30,6 +30,17 @@ const blogSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "Author is required."],
     },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    numOfLikes: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
