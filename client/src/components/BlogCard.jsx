@@ -9,27 +9,34 @@ function BlogCard({ blog }) {
     _id,
   } = blog;
 
+  const publishedAt = new Date(createdAt).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
-    <div className="flex gap-10 pb-16 justify-between">
+    <div className="flex gap-10 py-8 justify-between border-b border-gray-300">
       <div className="flex-1 space-y-2">
         <Link to={`/blogs/${_id}`}>
           <h1 className="text-2xl font-semibold capitalize hover:underline">
             {title}
           </h1>
         </Link>
-        <h3 className="uppercase opacity-45">{category}</h3>
-        <div className="flex justify-between text-sm">
-          <div className="flex gap-2 items-center">
-            <img
-              src="/defaultUser.png"
-              alt="profilePic"
-              className="h-8 w-8 rounded-full object-cover"
-            />
-            <span>{fullname}</span>
+
+        <div className="flex gap-2 items-center pt-4">
+          <img
+            src="/defaultUser.png"
+            alt="profilePic"
+            className="h-10 w-10 rounded-full object-cover"
+          />
+          <div>
+            <p className="font-semibold">{fullname}</p>
+            <p className="text-sm">{publishedAt}</p>
           </div>
-          <span>{createdAt.split("T")[0]}</span>
         </div>
       </div>
+
       <div className="h-28 w-32">
         <img src={banner} alt="banner" className="h-full w-full object-cover" />
       </div>

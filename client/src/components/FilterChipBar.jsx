@@ -47,10 +47,10 @@ export default function FilterChipBar() {
           <motion.button
             key={i}
             onClick={() => setActive(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+            className={`px-4 py-2 rounded-md text-sm font-medium transition ${
               active === category
                 ? "bg-black text-white"
-                : "bg-gray-200 text-black hover:bg-gray-300"
+                : "bg-gray-100 text-black hover:bg-gray-300"
             }`}
             whileTap={{ scale: 0.9 }}
           >

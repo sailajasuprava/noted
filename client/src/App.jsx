@@ -36,10 +36,7 @@ function App() {
             path="/profile"
             element={auth ? <Profile /> : <Navigate to="/login" />}
           />
-          <Route
-            path="/blogs/:id"
-            element={auth ? <BlogDetails /> : <Navigate to="/login" />}
-          />
+          <Route path="/blogs/:id" element={<BlogDetails />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Route>
