@@ -116,7 +116,7 @@ const likeBlog = async (req, res, next) => {
       blog.likes.splice(userIndex, 1);
     }
 
-    await blog.save();
+    await blog.save({ validateBeforeSave: false });
 
     res.status(200).json({
       status: "success",
