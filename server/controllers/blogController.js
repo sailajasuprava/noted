@@ -3,7 +3,16 @@ const AppError = require("../utils/appArror");
 
 const getAllBlogs = async (req, res, next) => {
   try {
-    const blogs = await Blog.find().select("banner title category createdAt");
+    const page = req.query.page * 1 || 1;
+    const limit = 2;
+    const skip = (page - 1) * limit;
+
+    const blogs = await Blog.find()
+      .select("banner title category createdAt")
+      .skip(skip)
+      .limit(limit);
+
+    const totalBlogs = await Blog.countDocuments();
 
     if (!blogs) {
       return next(new AppError("No blogs found", 404));
@@ -11,7 +20,7 @@ const getAllBlogs = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      results: blogs.length,
+      hasMore: totalBlogs > page * limit,
       data: blogs,
     });
   } catch (err) {
