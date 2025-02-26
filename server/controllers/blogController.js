@@ -7,12 +7,18 @@ const getAllBlogs = async (req, res, next) => {
     const limit = 2;
     const skip = (page - 1) * limit;
 
-    const blogs = await Blog.find()
+    const filter = {};
+    const { category } = req.query;
+    if (category && category !== "all") {
+      filter.category = category;
+    }
+
+    const blogs = await Blog.find(filter)
       .select("banner title category createdAt")
       .skip(skip)
       .limit(limit);
 
-    const totalBlogs = await Blog.countDocuments();
+    const totalBlogs = await Blog.countDocuments(filter);
 
     if (!blogs) {
       return next(new AppError("No blogs found", 404));

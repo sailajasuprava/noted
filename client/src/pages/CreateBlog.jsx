@@ -35,7 +35,7 @@ function CreateBlog() {
             <option value="movies">Movies</option>
             <option value="fashion">Fashion</option>
             <option value="sports">Sports</option>
-            <option value="socialmedia">Social Media</option>
+            <option value="creativity">Creativity</option>
             <option value="gaming">Gaming</option>
           </select>
         </div>

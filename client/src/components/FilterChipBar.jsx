@@ -1,24 +1,23 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { FaAngleRight, FaChevronLeft } from "react-icons/fa";
 
 const categories = [
-  "All",
-  "Science",
-  "Technology",
-  "Food",
-  "Travel",
-  "Finance",
-  "Business",
-  "Movies",
-  "Fashion",
-  "Sports",
-  "Social Media",
-  "Gaming",
+  "all",
+  "science",
+  "technology",
+  "food",
+  "travel",
+  "finance",
+  "business",
+  "movies",
+  "fashion",
+  "sports",
+  "creativity",
+  "gaming",
 ];
 
-export default function FilterChipBar() {
-  const [active, setActive] = useState("All");
+export default function FilterChipBar({ active, handleCategoryClick }) {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
@@ -46,8 +45,8 @@ export default function FilterChipBar() {
         {categories.map((category, i) => (
           <motion.button
             key={i}
-            onClick={() => setActive(category)}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition ${
+            onClick={() => handleCategoryClick(category)}
+            className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition ${
               active === category
                 ? "bg-black text-white"
                 : "bg-gray-100 text-black hover:bg-gray-300"

@@ -31,6 +31,7 @@ function BlogCard({ blog }) {
             className="h-10 w-10 rounded-full object-cover"
           />
           <div>
+            <p>{category}</p>
             <p className="font-semibold">{fullname}</p>
             <p className="text-sm">{publishedAt}</p>
           </div>
