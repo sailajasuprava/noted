@@ -1,22 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useState } from "react";
 import { FaPenAlt } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
+import { CiEdit, CiLogout, CiUser } from "react-icons/ci";
 
 function Navbar() {
   const { auth } = useAuth();
   const { isLoading, handleLogout } = useLogout();
-  const [showMenu, setShowMenu] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <header className="flex justify-between bg-white w-screen px-8 py-2 fixed z-10">
+    <header className="flex gap-4 justify-between items-center flex-wrap bg-white w-screen px-4 sm:px-8 py-2 fixed z-10">
       <Link to="/">
-        <div className="font-serif font-bold text-3xl flex gap-1">
+        <div className="font-serif font-bold text-2xl xs:text-3xl flex gap-1">
           Noted.
           <span>
             <FaPenAlt />
@@ -24,20 +23,20 @@ function Navbar() {
         </div>
       </Link>
 
-      <div className="relative">
+      <div className="relative order-2 sm:order-[0] w-full sm:w-auto">
         <input
           type="text"
-          placeholder="search"
-          className="px-4 pt-1 pb-2 border-2 border-gray-300 rounded-full"
+          placeholder="Search"
+          className="px-4 pt-1 pb-2 border-2 border-gray-300 rounded-full w-full sm:w-auto"
         />
         <IoSearch className="absolute right-4 top-1/2 -translate-y-1/2" />
       </div>
 
-      <ul className={`${showMenu ? "nav-mobile" : "nav-desk"}`}>
+      <ul className="flex items-center gap-2">
         {auth ? (
           <div className="relative">
             <button
-              className="flex items-center bg-gray-200 p-2 pr-4 rounded-md"
+              className="flex items-center bg-gray-200 p-1 pr-4 rounded-md"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
               <span>
@@ -47,19 +46,32 @@ function Navbar() {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg">
+              <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-lg">
                 <Link to="/write">
-                  <li className="block px-4 py-2 hover:bg-gray-100">Write</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
+                    <span>
+                      <CiEdit size={22} />
+                    </span>
+                    <span>Write</span>
+                  </li>
                 </Link>
                 <Link to="/profile">
-                  <li className="block px-4 py-2 hover:bg-gray-100">Profile</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
+                    <span>
+                      <CiUser size={22} />
+                    </span>
+                    <span>Profile</span>
+                  </li>
                 </Link>
                 <button
-                  className="btn-black w-full rounded-none"
+                  className="px-4 py-2 w-full hover:bg-gray-100 flex items-center gap-2"
                   onClick={handleLogout}
                   disabled={isLoading}
                 >
-                  Log out
+                  <span>
+                    <CiLogout size={22} />
+                  </span>
+                  <span>Log out</span>
                 </button>
               </div>
             )}
@@ -75,12 +87,6 @@ function Navbar() {
           </>
         )}
       </ul>
-      <button
-        className="sm:hidden"
-        onClick={() => setShowMenu((prev) => !prev)}
-      >
-        <GiHamburgerMenu size={30} />
-      </button>
     </header>
   );
 }
