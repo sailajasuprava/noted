@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { FaAngleRight, FaChevronLeft } from "react-icons/fa";
+import { useBlog } from "../context/BlogContext";
 
 const categories = [
   "all",
@@ -17,7 +18,8 @@ const categories = [
   "gaming",
 ];
 
-export default function FilterChipBar({ active, handleCategoryClick }) {
+export default function FilterChipBar() {
+  const { active, handleCategoryClick } = useBlog();
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {

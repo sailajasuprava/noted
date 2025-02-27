@@ -1,7 +1,10 @@
 import Spinner from "./Spinner";
 import BlogCard from "./BlogCard";
+import { useBlog } from "../context/BlogContext";
 
-function BlogList({ blogs, hasMore, isLoading, fetchAllBlogs }) {
+function BlogList() {
+  const { blogs, hasMore, isLoading, fetchAllBlogs } = useBlog();
+
   if (!blogs.length) return <Spinner />;
 
   return (
