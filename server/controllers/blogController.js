@@ -25,8 +25,6 @@ const getAllBlogs = async (req, res, next) => {
       .skip(skip)
       .limit(limit);
 
-    console.log(search);
-    console.log(blogs);
     const totalBlogs = await Blog.countDocuments(filter);
 
     if (!blogs) {

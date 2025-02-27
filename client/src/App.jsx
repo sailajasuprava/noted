@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import { useAuth } from "./context/AuthContext";
 import CreateBlog from "./pages/CreateBlog";
-import Profile from "./pages/Profile";
 import BlogDetails from "./pages/BlogDetails";
 import SearchResults from "./pages/SearchResults";
 
@@ -32,10 +31,6 @@ function App() {
           <Route
             path="/write"
             element={auth ? <CreateBlog /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/profile"
-            element={auth ? <Profile /> : <Navigate to="/login" />}
           />
           <Route path="/blogs/:id" element={<BlogDetails />} />
           <Route path="/search" element={<SearchResults />} />
