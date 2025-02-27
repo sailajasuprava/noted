@@ -1,8 +1,13 @@
 import useCreateBlog from "../hooks/useCreateBlog";
 
 function CreateBlog() {
-  const { formData, isLoading, handleFormData, handleFormSubmission } =
-    useCreateBlog();
+  const {
+    formData,
+    isLoading,
+    handleFormData,
+    handleFormSubmission,
+    handleImageChange,
+  } = useCreateBlog();
 
   return (
     <div className="max-w-screen-md mx-auto">
@@ -40,7 +45,7 @@ function CreateBlog() {
           </select>
         </div>
 
-        {/* <div className="flex gap-4 items-center border-4 border-teal-500 border-dotted p-3">
+        <div className="flex gap-4 items-center border-4 border-teal-500 border-dotted p-3">
           <label
             htmlFor="file-upload"
             className="cursor-pointer bg-gray-300 font-semibold px-4 py-2 rounded-lg shadow hover:bg-gray-400 transition"
@@ -52,9 +57,17 @@ function CreateBlog() {
             type="file"
             accept="image/*"
             className="hidden"
+            onChange={handleImageChange}
+            required
           />
           <span className="text-gray-600">No file chosen</span>
-        </div> */}
+        </div>
+
+        {formData?.banner && (
+          <div>
+            <img src={formData.banner} alt="image" />
+          </div>
+        )}
 
         <textarea
           rows="5"

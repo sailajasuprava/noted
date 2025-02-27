@@ -19,22 +19,26 @@ function BlogCard({ blog }) {
     <div className="flex gap-10 py-8 justify-between border-b border-gray-300">
       <div className="flex-1 space-y-2">
         <Link to={`/blogs/${_id}`}>
-          <h1 className="text-2xl font-semibold capitalize hover:underline">
+          <h1 className="text-2xl font-semibold capitalize hover:underline pb-4">
             {title}
           </h1>
         </Link>
 
-        <div className="flex gap-2 items-center pt-4">
-          <img
-            src="/defaultUser.png"
-            alt="profilePic"
-            className="h-10 w-10 rounded-full object-cover"
-          />
-          <div>
-            <p>{category}</p>
-            <p className="font-semibold">{fullname}</p>
-            <p className="text-sm">{publishedAt}</p>
+        <div className="flex justify-between items-center">
+          <div className="flex gap-2 items-center">
+            <img
+              src="/defaultUser.png"
+              alt="profilePic"
+              className="h-10 w-10 rounded-full object-cover"
+            />
+
+            <div>
+              <p className="font-semibold">{fullname}</p>
+              <p className="text-sm">{publishedAt}</p>
+            </div>
           </div>
+
+          <div className="uppercase text-sm">{category}</div>
         </div>
       </div>
 

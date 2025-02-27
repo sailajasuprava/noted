@@ -6,6 +6,7 @@ const initialState = {
   title: "",
   category: "",
   content: "",
+  banner: "",
 };
 
 function useCreateBlog() {
@@ -50,7 +51,26 @@ function useCreateBlog() {
     return true;
   }
 
-  return { formData, isLoading, handleFormData, handleFormSubmission };
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setFormData({ ...formData, banner: reader.result });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  return {
+    formData,
+    isLoading,
+    handleFormData,
+    handleFormSubmission,
+    handleImageChange,
+  };
 }
 
 export default useCreateBlog;

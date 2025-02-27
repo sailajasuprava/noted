@@ -1,3 +1,4 @@
+const cloudinary = require("../config/cloudinary");
 const Blog = require("../models/blogModel");
 const AppError = require("../utils/appArror");
 
@@ -63,12 +64,24 @@ const getBlog = async (req, res, next) => {
 
 const createBlog = async (req, res, next) => {
   try {
-    const { title, category, content } = req.body;
+    const { title, category, content, banner } = req.body;
     const { _id } = req.user;
+
+    let cloudinaryResponse = null;
+
+    if (banner) {
+      cloudinaryResponse = await cloudinary.uploader.upload(banner, {
+        folder: "blogs",
+      });
+    }
+
     const newBlog = await Blog.create({
       title,
       category,
       content,
+      banner: cloudinaryResponse.secure_url
+        ? cloudinaryResponse.secure_url
+        : "",
       author: _id,
     });
 
