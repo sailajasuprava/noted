@@ -162,6 +162,31 @@ const likeBlog = async (req, res, next) => {
   }
 };
 
+const mostLikedBlogs = async (req, res, next) => {
+  try {
+    const blogs = await Blog.aggregate([
+      {
+        $sort: { numOfLikes: -1 },
+      },
+      {
+        $limit: 5,
+      },
+      {
+        $project: {
+          title: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      data: blogs,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getBlog,
@@ -169,4 +194,5 @@ module.exports = {
   updateBlog,
   deleteBlog,
   likeBlog,
+  mostLikedBlogs,
 };
