@@ -6,6 +6,7 @@ const BlogContext = createContext();
 function BlogProvider({ children }) {
   const [active, setActive] = useState("all");
   const [blogs, setBlogs] = useState([]);
+  const [mostLikedBlogs, setMostLikedBlogs] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState();
@@ -13,6 +14,7 @@ function BlogProvider({ children }) {
 
   useEffect(() => {
     fetchAllBlogs();
+    fetchMostLikedBlogs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
@@ -35,6 +37,16 @@ function BlogProvider({ children }) {
       setIsLoading(false);
     }
   }
+
+  async function fetchMostLikedBlogs() {
+    try {
+      const res = await axios.get(`/blogs/most-liked`);
+      setMostLikedBlogs((prev) => [...prev, ...res.data.data]);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
+
   return (
     <BlogContext.Provider
       value={{
@@ -52,6 +64,7 @@ function BlogProvider({ children }) {
         setSearchResults,
         fetchAllBlogs,
         handleCategoryClick,
+        mostLikedBlogs,
       }}
     >
       {children}
