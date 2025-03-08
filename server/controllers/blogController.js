@@ -1,4 +1,4 @@
-const cloudinary = require("../config/cloudinary");
+const cloudinary = require("../utils/cloudinary");
 const Blog = require("../models/blogModel");
 const AppError = require("../utils/appArror");
 
