@@ -10,6 +10,7 @@ import { useAuth } from "./context/AuthContext";
 import CreateBlog from "./pages/CreateBlog";
 import BlogDetails from "./pages/BlogDetails";
 import SearchResults from "./pages/SearchResults";
+import Profile from "./pages/Profile";
 
 function App() {
   const { auth } = useAuth();
@@ -31,6 +32,10 @@ function App() {
           <Route
             path="/write"
             element={auth ? <CreateBlog /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={auth ? <Profile /> : <Navigate to="/login" />}
           />
           <Route path="/blogs/:id" element={<BlogDetails />} />
           <Route path="/search" element={<SearchResults />} />

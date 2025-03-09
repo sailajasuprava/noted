@@ -14,9 +14,12 @@ function BlogProvider({ children }) {
 
   useEffect(() => {
     fetchAllBlogs();
-    fetchMostLikedBlogs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
+
+  useEffect(() => {
+    fetchMostLikedBlogs();
+  }, []);
 
   const handleCategoryClick = (category) => {
     setActive(category);
