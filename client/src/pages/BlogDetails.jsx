@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import CommentCard from "../components/CommentCard";
 import { useAuth } from "../context/AuthContext";
+import { GoComment } from "react-icons/go";
 
 function BlogDetails() {
   const [blog, setBlog] = useState();
@@ -84,38 +85,50 @@ function BlogDetails() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 space-y-10">
+    <div className="max-w-2xl mx-auto mt-10">
       <h1 className="text-4xl font-bold capitalize">{title}</h1>
 
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-center">
-          <img
-            src="/defaultUser.png"
-            alt="profilePic"
-            className="h-10 w-10 rounded-full object-cover"
-          />
-          <div>
-            <p className="font-semibold">{fullname}</p>
-            <p className="text-sm">{publishedAt}</p>
-          </div>
-        </div>
-
-        <div className="flex gap-2">
-          <button
-            className="cursor-pointer hover:text-red-500"
-            onClick={handleLike}
-          >
-            {likes.includes(auth?._id) ? (
-              <IoIosHeart size={25} fill="red" />
-            ) : (
-              <IoIosHeartEmpty size={25} />
-            )}
-          </button>
-          <span>{numOfLikes}</span>
+      <div className="flex gap-2 py-8 items-center border-b border-gray-200">
+        <img
+          src="/defaultUser.png"
+          alt="profilePic"
+          className="h-10 w-10 rounded-full object-cover"
+        />
+        <div>
+          <p className="font-semibold">{fullname}</p>
+          <p className="text-sm text-gray-600">Published - {publishedAt}</p>
         </div>
       </div>
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-between items-center py-3 border-b border-gray-200">
+        <div className="flex gap-8">
+          <div className="flex gap-1">
+            <button
+              className="cursor-pointer hover:text-red-500"
+              onClick={handleLike}
+            >
+              {likes.includes(auth?._id) ? (
+                <IoIosHeart size={22} fill="red" />
+              ) : (
+                <IoIosHeartEmpty size={22} />
+              )}
+            </button>
+            <span>{numOfLikes}</span>
+          </div>
+          <div className="flex gap-1">
+            <button>
+              <GoComment size={20} />
+            </button>
+            <span>{comments?.length}</span>
+          </div>
+        </div>
+
+        <div className="flex gap-2 items-center">
+          {Math.round(content.length / 1000)} min read
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center py-10">
         <img src={banner} alt="banner" className="w-full" />
       </div>
 

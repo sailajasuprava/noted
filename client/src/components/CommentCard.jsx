@@ -2,10 +2,11 @@ function CommentCard({ item }) {
   const {
     comment,
     userId: { fullname },
+    createdAt,
   } = item;
 
   return (
-    <div className="flex gap-2 items-center px-8 py-4 border-b border-gray-300">
+    <div className="flex gap-2 items-center py-6 border-b border-gray-300">
       <img
         src="/defaultUser.png"
         alt="profilePic"
