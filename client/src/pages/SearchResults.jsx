@@ -1,22 +1,23 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useBlog } from "../context/BlogContext";
+// import { useBlog } from "../context/BlogContext";
 import { toast } from "react-hot-toast";
 import axios from "../lib/axios";
 import BlogCard from "../components/BlogCard";
 import Spinner from "../components/Spinner";
+import { useSearch } from "../context/SearchContext";
 
 function SearchResults() {
   const {
     searchResults,
     setSearchResults,
-    page,
-    setPage,
+    searchPage,
+    setSearchPage,
     hasMore,
     setHasMore,
     isLoading,
     setIsLoading,
-  } = useBlog();
+  } = useSearch();
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get("q");
 
@@ -24,21 +25,39 @@ function SearchResults() {
     fetchBlogsBySearch();
 
     return () => {
+      console.log(searchPage);
       setSearchResults([]);
-      setPage(1);
+      setSearchPage(1);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
-  async function fetchBlogsBySearch(pageNum = 1) {
+  // async function fetchBlogsBySearch(pageNum = 1) {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await axios.get(
+  //       `/blogs?page=${pageNum}&search=${searchTerm}`
+  //     );
+  //     setSearchResults((prev) => [...prev, ...res.data.data]);
+  //     setHasMore(res.data.hasMore);
+  //     setSearchPage(pageNum);
+  //   } catch (error) {
+  //     toast.error(error.response.data.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
+
+  async function fetchBlogsBySearch() {
+    console.log(searchPage);
     try {
       setIsLoading(true);
       const res = await axios.get(
-        `/blogs?page=${pageNum}&search=${searchTerm}`
+        `/blogs?page=${searchPage}&search=${searchTerm}`
       );
       setSearchResults((prev) => [...prev, ...res.data.data]);
       setHasMore(res.data.hasMore);
-      setPage(pageNum);
+      setSearchPage((prev) => prev + 1);
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
@@ -61,7 +80,8 @@ function SearchResults() {
 
       {hasMore ? (
         <button
-          onClick={() => fetchBlogsBySearch(page + 1)}
+          onClick={fetchBlogsBySearch}
+          // onClick={() => fetchBlogsBySearch(searchPage + 1)}
           disabled={isLoading}
           className="btn-white mt-10"
         >
