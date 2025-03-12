@@ -7,7 +7,6 @@ function BlogProvider({ children }) {
   const [active, setActive] = useState("all");
   const [blogs, setBlogs] = useState([]);
   const [mostLikedBlogs, setMostLikedBlogs] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -63,8 +62,6 @@ function BlogProvider({ children }) {
         setHasMore,
         isLoading,
         setIsLoading,
-        searchResults,
-        setSearchResults,
         fetchAllBlogs,
         handleCategoryClick,
         mostLikedBlogs,

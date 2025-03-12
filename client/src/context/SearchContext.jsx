@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import axios from "../lib/axios";
+import { createContext, useContext, useState } from "react";
+
 const SearchContext = createContext();
 
 function SearchProvider({ children }) {

@@ -6,7 +6,6 @@ import { useState } from "react";
 import { FaPenAlt } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { CiEdit, CiLogout, CiUser } from "react-icons/ci";
-import { useBlog } from "../context/BlogContext";
 
 function Navbar() {
   const { auth } = useAuth();
@@ -14,12 +13,9 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
-  const { setPage, setSearchResults } = useBlog();
 
   function handleKeyDown(e) {
     if (e.keyCode === 13) {
-      setSearchResults([]);
-      setPage(1);
       setSearchInput("");
       navigate(`/search?q=${searchInput}`);
     }
