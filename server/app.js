@@ -6,6 +6,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
 const blogRouter = require("./routes/blogRoutes");
+const categoryRouter = require("./routes/categoryRoutes");
 const commentRouter = require("./routes/commentRoutes");
 
 const globalErrorHandler = require("./controllers/errorController");
@@ -27,6 +28,7 @@ app.use(mongoSanitize());
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
+app.use("/api/categories", categoryRouter);
 app.use("/api/comments", commentRouter);
 
 app.all("*", (req, res, next) => {

@@ -9,7 +9,8 @@ const globalErrorHandler = (err, req, res, next) => {
     err = new AppError(message, 400);
   }
   if (err.code === 11000) {
-    const field = err.keyValue.email || err.keyValue.title; //where unique:true #fff
+    const field =
+      err.keyValue.email || err.keyValue.title || err.keyValue.categoryName; //where unique:true #fff
     err = new AppError(`Duplicate field value: ${field}`, 400);
   }
   if (err.name === "ValidationError") {
