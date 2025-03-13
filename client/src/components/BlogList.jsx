@@ -8,7 +8,7 @@ function BlogList() {
   if (!blogs.length) return <Spinner />;
 
   return (
-    <div className="w-3xl">
+    <div className="w-full">
       {blogs.map((blog) => (
         <BlogCard key={blog._id} blog={blog} />
       ))}

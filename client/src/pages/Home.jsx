@@ -7,8 +7,12 @@ function Home() {
     <div className="px-12 pt-8">
       <FilterChipBar />
       <div className="flex gap-16 mt-10">
-        <BlogList />
-        <MostLikedBlogsList />
+        <div className="w-3xl">
+          <BlogList />
+        </div>
+        <div className="flex-1">
+          <MostLikedBlogsList />
+        </div>
       </div>
     </div>
   );

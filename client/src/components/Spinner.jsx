@@ -2,8 +2,8 @@ import { CgSpinner } from "react-icons/cg";
 
 function Spinner() {
   return (
-    <div className="grid justify-center animate-spin mt-16">
-      <CgSpinner size={40} />
+    <div className="grid justify-center mt-16">
+      <CgSpinner size={40} className="animate-spin" />
     </div>
   );
 }
