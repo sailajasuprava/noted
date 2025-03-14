@@ -23,10 +23,10 @@ function Navbar() {
   }
 
   return (
-    <header className="fixed z-10 bg-white w-screen px-4 sm:px-8 py-4">
+    <header className="fixed z-10 bg-black text-white w-screen px-4 sm:px-8 py-4">
       <div className="flex gap-4 justify-between items-center flex-wrap">
         <Link to="/">
-          <div className="font-serif font-bold text-2xl xs:text-3xl flex gap-1">
+          <div className="font-bold uppercase text-2xl xs:text-3xl flex gap-1">
             Noted.
             <span>
               <FaPenAlt />
@@ -50,7 +50,7 @@ function Navbar() {
           {auth ? (
             <div className="relative">
               <button
-                className="flex items-center bg-gray-200 p-1 pr-4 rounded-md"
+                className="flex items-center bg-gray-800 p-1 pr-4 rounded-md"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <span>
@@ -60,9 +60,9 @@ function Navbar() {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-lg">
+                <div className="absolute right-0 mt-2 w-36 z-[12] bg-black shadow-lg rounded-lg">
                   <Link to="/write">
-                    <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
+                    <li className="px-4 py-2 hover:bg-gray-800 flex items-center gap-2">
                       <span>
                         <CiEdit size={22} />
                       </span>
@@ -71,7 +71,7 @@ function Navbar() {
                   </Link>
 
                   <Link to="/profile">
-                    <li className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
+                    <li className="px-4 py-2 hover:bg-gray-800 flex items-center gap-2">
                       <span>
                         <CiUser size={22} />
                       </span>
@@ -80,7 +80,7 @@ function Navbar() {
                   </Link>
 
                   <button
-                    className="px-4 py-2 w-full hover:bg-gray-100 flex items-center gap-2"
+                    className="px-4 py-2 w-full hover:bg-gray-800 flex items-center gap-2"
                     onClick={handleLogout}
                     disabled={isLoading}
                   >

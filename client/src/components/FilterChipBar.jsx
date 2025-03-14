@@ -36,7 +36,7 @@ export default function FilterChipBar() {
     <div className="relative flex items-center w-full overflow-hidden mt-8">
       <button
         onClick={() => scroll("left")}
-        className="absolute left-0 z-[8] bg-white shadow-md rounded-full p-2"
+        className="absolute left-0 z-[8] shadow-md rounded-full p-2"
       >
         <FaChevronLeft />
       </button>
@@ -48,7 +48,7 @@ export default function FilterChipBar() {
         {categories.map((category, i) => (
           <NavLink key={i} to={`/category/${category.categoryName}`}>
             <button
-              className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition bg-gray-100 text-black hover:bg-gray-300`}
+              className={`px-4 py-2 rounded-md text-sm font-medium uppercase transition text-white hover:opacity-50`}
             >
               {category.categoryName}
             </button>
@@ -58,7 +58,7 @@ export default function FilterChipBar() {
 
       <button
         onClick={() => scroll("right")}
-        className="absolute right-0 z-[8] bg-white shadow-md rounded-full p-2"
+        className="absolute right-0 z-[8] shadow-md rounded-full p-2"
       >
         <FaAngleRight />
       </button>
