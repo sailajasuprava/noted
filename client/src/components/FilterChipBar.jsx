@@ -3,21 +3,6 @@ import { FaAngleRight, FaChevronLeft } from "react-icons/fa";
 import { useCategory } from "../context/CategoryContext";
 import { NavLink } from "react-router-dom";
 
-// const categories = [
-//   "all",
-//   "science",
-//   "technology",
-//   "food",
-//   "travel",
-//   "finance",
-//   "business",
-//   "movies",
-//   "fashion",
-//   "sports",
-//   "creativity",
-//   "gaming",
-// ];
-
 export default function FilterChipBar() {
   const { categories } = useCategory();
   const scrollRef = useRef(null);
