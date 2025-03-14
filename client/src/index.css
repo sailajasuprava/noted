@@ -25,3 +25,8 @@
 @theme {
   --breakpoint-xs: 24rem;
 }
+
+.active button {
+  background-color: black;
+  color: white;
+}

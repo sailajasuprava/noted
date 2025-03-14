@@ -85,7 +85,7 @@ function BlogDetails() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
+    <div className="max-w-3xl mx-auto">
       <h1 className="text-4xl font-bold capitalize">{title}</h1>
 
       <div className="flex gap-2 py-8 items-center border-b border-gray-200">

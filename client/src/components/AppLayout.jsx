@@ -6,7 +6,7 @@ function AppLayout() {
   return (
     <div className="flex flex-col overflow-hidden min-h-screen">
       <Navbar />
-      <main className="flex-1 pt-24 sm:pt-16">
+      <main className="flex-1 mt-16 sm:mt-44">
         <Outlet />
       </main>
       <Footer />
