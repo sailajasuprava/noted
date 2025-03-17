@@ -76,6 +76,7 @@ function BlogDetails() {
     likes,
     numOfLikes,
     createdAt,
+    category: { categoryName },
   } = blog;
 
   const publishedAt = new Date(createdAt).toLocaleDateString("en-US", {
@@ -85,22 +86,26 @@ function BlogDetails() {
   });
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <h1 className="text-4xl font-bold capitalize">{title}</h1>
+    <div className="max-w-3xl mx-auto mt-44">
+      <div className="h-[400px]">
+        <img src={banner} alt="banner" className="w-full h-full object-cover" />
+      </div>
 
-      <div className="flex gap-2 py-8 items-center border-b border-gray-200">
-        <img
-          src="/defaultUser.png"
-          alt="profilePic"
-          className="h-10 w-10 rounded-full object-cover"
-        />
+      <div className="text-xs uppercase py-7 flex justify-between">
         <div>
-          <p className="font-semibold">{fullname}</p>
-          <p className="text-sm text-gray-600">Published - {publishedAt}</p>
+          <span className="px-2 bg-black text-white">{categoryName}</span>
+          <span className="ml-4">{publishedAt}</span>
+        </div>
+        <div className="text-red-500 uppercase text-xs font-bold">
+          {fullname}
         </div>
       </div>
 
-      <div className="flex justify-between items-center py-3 border-b border-gray-200">
+      <div className="flex justify-between items-center py-2 border-y border-gray-200">
+        <div className="text-gray-400">
+          {Math.round(content.length / 1000)} min read
+        </div>
+
         <div className="flex gap-8">
           <div className="flex gap-1">
             <button
@@ -122,17 +127,13 @@ function BlogDetails() {
             <span>{comments?.length}</span>
           </div>
         </div>
-
-        <div className="flex gap-2 items-center">
-          {Math.round(content.length / 1000)} min read
-        </div>
       </div>
 
-      <div className="flex justify-center items-center py-10">
-        <img src={banner} alt="banner" className="w-full" />
-      </div>
+      <h1 className="text-2xl font-bold capitalize tracking-tight leading-6 pt-6 pb-4">
+        {title}
+      </h1>
 
-      <p className="text-xl font-serif leading-8">{content}</p>
+      <p className="">{content}</p>
 
       <form
         className="border p-4 my-10 space-y-4 text-end rounded-md"
@@ -153,7 +154,9 @@ function BlogDetails() {
       </form>
 
       <div>
-        <h1 className="text-2xl font-bold">Comments ({comments.length})</h1>
+        <h1 className="text-xl font-bold tracking-tight">
+          Comments ({comments.length})
+        </h1>
 
         {comments.map((item, i) => (
           <CommentCard key={i} item={item} />

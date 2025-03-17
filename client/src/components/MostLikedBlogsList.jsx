@@ -14,7 +14,7 @@ function MostLikedBlogsList() {
         {mostLikedBlogs.map((blog, i) => (
           <li key={blog._id} className="flex gap-1">
             <span className="text-2xl font-bold opacity-20">0{i + 1}.</span>
-            <Link to={`/blods/${blog._id}`}>
+            <Link to={`/blogs/${blog._id}`}>
               <span className="font-semibold capitalize tracking-tight leading-6 hover:opacity-50 duration-300 pb-4">
                 {blog.title}
               </span>

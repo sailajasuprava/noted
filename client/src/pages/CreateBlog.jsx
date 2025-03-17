@@ -1,3 +1,4 @@
+import { useCategory } from "../context/CategoryContext";
 import useCreateBlog from "../hooks/useCreateBlog";
 
 function CreateBlog() {
@@ -9,8 +10,10 @@ function CreateBlog() {
     handleImageChange,
   } = useCreateBlog();
 
+  const { categories } = useCategory();
+
   return (
-    <div className="max-w-screen-md mx-auto">
+    <div className="max-w-screen-md mx-auto mt-40">
       <h1 className="text-center text-3xl my-7 font-semibold">Create a post</h1>
       <form className="flex flex-col gap-4" onSubmit={handleFormSubmission}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
@@ -31,17 +34,12 @@ function CreateBlog() {
             onChange={handleFormData}
           >
             <option value="">Select a category</option>
-            <option value="science">Science</option>
-            <option value="technology">Technology</option>
-            <option value="food">Food</option>
-            <option value="travel">Travel</option>
-            <option value="finance">Finance</option>
-            <option value="business">Business</option>
-            <option value="movies">Movies</option>
-            <option value="fashion">Fashion</option>
-            <option value="sports">Sports</option>
-            <option value="creativity">Creativity</option>
-            <option value="gaming">Gaming</option>
+
+            {categories.map((item, i) => (
+              <option key={i} value={item._id} className="capitalize">
+                {item.categoryName}
+              </option>
+            ))}
           </select>
         </div>
 

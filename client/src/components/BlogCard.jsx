@@ -27,7 +27,7 @@ function BlogCard({ blog }) {
         <span className="px-2 bg-black text-white">{categoryName}</span>
         <span className="ml-4">{publishedAt}</span>
       </p>
-      <Link to={`/blods/${_id}`}>
+      <Link to={`/blogs/${_id}`}>
         <h2 className="text-xl font-bold capitalize tracking-tight leading-6 hover:opacity-50 duration-300">
           {title}
         </h2>

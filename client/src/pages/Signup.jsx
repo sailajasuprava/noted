@@ -7,7 +7,7 @@ function Signup() {
     useSignup();
 
   return (
-    <div className="max-w-sm sm:max-w-md mx-auto p-8 rounded-md shadow-2xl">
+    <div className="max-w-sm sm:max-w-md mx-auto p-8 rounded-md shadow-2xl mt-40">
       <form className="w-full space-y-4" onSubmit={handleFormSubmission}>
         <h1 className="text-3xl font-bold"> Create your account</h1>
         <div>

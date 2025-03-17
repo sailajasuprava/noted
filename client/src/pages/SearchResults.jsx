@@ -48,15 +48,17 @@ function SearchResults() {
   if (!searchResults.length) return <Spinner />;
 
   return (
-    <div className="max-w-3xl mx-auto mt-10">
-      <p className="text-2xl">
+    <div className="max-w-3xl mx-auto mt-40">
+      <p className="text-2xl pb-10">
         Search results for{" "}
         <span className="font-semibold">&quot;{searchTerm}&quot;</span>
       </p>
 
-      {searchResults.map((blog) => (
-        <BlogCard key={blog._id} blog={blog} />
-      ))}
+      <div className="grid grid-cols-2 gap-10">
+        {searchResults.map((blog) => (
+          <BlogCard key={blog._id} blog={blog} />
+        ))}
+      </div>
 
       {hasMore ? (
         <button
