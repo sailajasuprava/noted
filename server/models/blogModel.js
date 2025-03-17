@@ -24,6 +24,11 @@ const blogSchema = new mongoose.Schema(
       required: [true, "Content is required."],
       minlength: [200, "Content must be at least 200 characters long."],
     },
+    summary: {
+      type: String,
+      required: [true, "summary is required."],
+      maxlength: [200, "summary must be less than 200 characters."],
+    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

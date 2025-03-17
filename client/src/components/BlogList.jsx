@@ -9,9 +9,11 @@ function BlogList() {
 
   return (
     <div className="w-full">
-      {blogs.map((blog) => (
-        <BlogCard key={blog._id} blog={blog} />
-      ))}
+      <div className="grid grid-cols-2 gap-10">
+        {blogs.map((blog) => (
+          <BlogCard key={blog._id} blog={blog} />
+        ))}
+      </div>
 
       {hasMore ? (
         <button

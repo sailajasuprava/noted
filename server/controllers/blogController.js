@@ -9,10 +9,7 @@ const getAllBlogs = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     const filter = {};
-    const { category, search } = req.query;
-    if (category && category !== "all") {
-      filter.category = category;
-    }
+    const { search } = req.query;
 
     if (search) {
       filter.$or = [
@@ -22,7 +19,7 @@ const getAllBlogs = async (req, res, next) => {
     }
 
     const blogs = await Blog.find(filter)
-      .select("banner title category createdAt")
+      .select("banner title summary category createdAt")
       .skip(skip)
       .limit(limit);
 
