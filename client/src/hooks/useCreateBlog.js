@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "../lib/axios";
+import { generateSummary } from "../lib/gemini";
 
 const initialState = {
   title: "",
   category: "",
   content: "",
+  summary: "",
   banner: "",
 };
 
 function useCreateBlog() {
   const [formData, setFormData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   function handleFormData(e) {
     setFormData((prev) => {
@@ -39,12 +42,12 @@ function useCreateBlog() {
   function handleInputValidation() {
     const { title, content } = formData;
 
-    if (title.length < 3 || title.length > 50) {
-      toast.error("Title must be between 3-50 characters.");
+    if (title.length < 3 || title.length > 100) {
+      toast.error("Title must be between 3-100 characters.");
       return false;
     }
-    if (content.length < 200) {
-      toast.error("Content must be of at least 200 characters.");
+    if (content.length < 400) {
+      toast.error("Content must be of at least 400 characters.");
       return false;
     }
 
@@ -64,9 +67,23 @@ function useCreateBlog() {
     }
   }
 
+  async function handleGenerateSummary(content) {
+    try {
+      setIsGenerating(true);
+      const data = await generateSummary(content);
+      setFormData((prev) => ({ ...prev, summary: data }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
   return {
     formData,
     isLoading,
+    isGenerating,
+    handleGenerateSummary,
     handleFormData,
     handleFormSubmission,
     handleImageChange,

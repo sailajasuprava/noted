@@ -5,6 +5,8 @@ function CreateBlog() {
   const {
     formData,
     isLoading,
+    isGenerating,
+    handleGenerateSummary,
     handleFormData,
     handleFormSubmission,
     handleImageChange,
@@ -68,7 +70,7 @@ function CreateBlog() {
         )}
 
         <textarea
-          rows="5"
+          rows="10"
           name="content"
           placeholder="Write something..."
           required
@@ -77,12 +79,31 @@ function CreateBlog() {
           onChange={handleFormData}
         ></textarea>
 
+        <div className="space-y-2">
+          <textarea
+            rows="3"
+            name="summary"
+            placeholder="Summary..."
+            required
+            className="input resize-none"
+            value={formData.summary}
+            onChange={handleFormData}
+          ></textarea>
+          <button
+            className="bg-green-500 px-2 py-1 disabled:opacity-45"
+            disabled={formData.content?.length < 400 || isGenerating}
+            onClick={() => handleGenerateSummary(formData.content)}
+          >
+            {isGenerating ? "Generating..." : "Generate using AI"}
+          </button>
+        </div>
+
         <button
           type="submit"
           className="btn-black rounded-none"
           disabled={isLoading}
         >
-          Publish
+          {isLoading ? "Publishing..." : "Publish"}
         </button>
       </form>
     </div>

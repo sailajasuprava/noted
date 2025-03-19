@@ -8,7 +8,7 @@ const blogSchema = new mongoose.Schema(
       lowercase: true,
       unique: true,
       minlength: [3, "Title must be at least 3 characters long."],
-      maxlength: [50, "Title must be less than 50 characters."],
+      maxlength: [100, "Title must be less than 100 characters."],
     },
     banner: {
       type: String,
@@ -22,12 +22,12 @@ const blogSchema = new mongoose.Schema(
     content: {
       type: String,
       required: [true, "Content is required."],
-      minlength: [200, "Content must be at least 200 characters long."],
+      minlength: [400, "Content must be at least 400 characters long."],
     },
     summary: {
       type: String,
       required: [true, "summary is required."],
-      maxlength: [200, "summary must be less than 200 characters."],
+      minlength: [120, "summary must be at least 120 characters long."],
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
