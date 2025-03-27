@@ -19,7 +19,7 @@ function BlogList() {
         <button
           onClick={fetchAllBlogs}
           disabled={isLoading}
-          className="btn-white mt-10"
+          className="btn-black mt-10"
         >
           {isLoading ? "Loading..." : "Load more"}
         </button>

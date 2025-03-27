@@ -74,7 +74,7 @@ function Signup() {
           />
         </div>
 
-        <button type="submit" className="btn-violet" disabled={isLoading}>
+        <button type="submit" className="btn mt-2" disabled={isLoading}>
           {isLoading ? (
             <PiSpinnerGapBold
               size={24}
@@ -91,7 +91,7 @@ function Signup() {
         Already have an account?{" "}
         <Link
           to="/login"
-          className="font-medium text-violet-400 hover:text-violet-500 hover:border-b"
+          className="font-medium text-red-500 dark:text-sky-400 hover:border-b"
         >
           Log in
         </Link>

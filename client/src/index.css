@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer components {
   .input {
-    @apply block w-full mt-1 px-4 py-2 border-2 border-gray-300 rounded-md;
+    @apply block w-full mt-1 px-4 py-2 border-2 border-gray-300 dark:bg-gray-700 dark:border-gray-700;
   }
   .label {
     @apply font-semibold text-sm capitalize;
   }
-  .btn-black {
-    @apply bg-black text-white rounded-full px-6 pt-2 pb-2.5 text-sm font-semibold hover:opacity-50 duration-300 cursor-pointer disabled:opacity-20;
+
+  .btn {
+    @apply py-3 w-full font-semibold bg-black hover:bg-gray-700 text-white dark:text-black dark:bg-sky-400 dark:hover:bg-sky-300 duration-300 cursor-pointer;
   }
-  .btn-white {
-    @apply bg-white text-black border border-black rounded-full px-6 pt-2 pb-2.5 text-sm font-semibold hover:opacity-50 duration-300 cursor-pointer disabled:opacity-20;
+  .btn-sm {
+    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold border bg-white hover:bg-gray-300 text-black dark:text-black dark:bg-sky-400 dark:hover:bg-sky-300 duration-300 cursor-pointer;
   }
 
-  .btn-violet {
-    @apply w-full font-semibold bg-violet-400 hover:bg-violet-500 duration-300 py-3 rounded-md text-white mt-2 cursor-pointer;
+  .btn-trans {
+    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold border bg-black text-white border-white dark:text-sky-400 dark:border-sky-400 duration-300 cursor-pointer;
   }
-  .btn-violet-sm {
-    @apply font-semibold bg-violet-400 hover:bg-violet-500 duration-300 py-2 px-4 rounded-md text-white mt-2 cursor-pointer;
+
+  .btn-black {
+    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold bg-black text-white hover:bg-gray-600 dark:text-black dark:bg-sky-400 dark:hover:bg-sky-300 duration-300 cursor-pointer;
   }
 }
 

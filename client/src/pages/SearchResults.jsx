@@ -64,7 +64,7 @@ function SearchResults() {
         <button
           onClick={() => fetchBlogsBySearch(searchPage + 1)}
           disabled={isLoading}
-          className="btn-white mt-10"
+          className="btn-black mt-10"
         >
           {isLoading ? "Loading..." : "Load more"}
         </button>
