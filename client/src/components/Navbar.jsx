@@ -1,52 +1,33 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useState } from "react";
-import { FaPenAlt } from "react-icons/fa";
-import { IoSearch } from "react-icons/io5";
 import { CiEdit, CiLogout, CiUser } from "react-icons/ci";
 import FilterChipBar from "./FilterChipBar";
+import { IoIosSunny } from "react-icons/io";
+import { LuMoonStar } from "react-icons/lu";
+import Logo from "./Logo";
+import SearchInput from "./SearchInput";
 
 function Navbar() {
   const { auth } = useAuth();
   const { isLoading, handleLogout } = useLogout();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
-  const navigate = useNavigate();
-
-  function handleKeyDown(e) {
-    if (e.keyCode === 13) {
-      setSearchInput("");
-      navigate(`/search?q=${searchInput}`);
-    }
-  }
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
     <header className="fixed z-10 bg-black text-white w-screen px-4 sm:px-8 py-4">
       <div className="flex gap-4 justify-between items-center flex-wrap">
-        <Link to="/">
-          <div className="font-bold uppercase text-2xl xs:text-3xl flex gap-1">
-            Noted.
-            <span>
-              <FaPenAlt />
-            </span>
-          </div>
-        </Link>
+        <Logo />
 
-        <div className="relative order-2 sm:order-[0] w-full sm:w-auto">
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="px-4 pt-1 pb-2 border-2 border-gray-300 rounded-full w-full sm:w-auto"
-          />
-          <IoSearch className="absolute right-4 top-1/2 -translate-y-1/2" />
-        </div>
+        <SearchInput />
 
         <ul className="flex items-center gap-2">
+          <button onClick={() => setIsDarkMode((prev) => !prev)}>
+            {isDarkMode ? <IoIosSunny size={22} /> : <LuMoonStar size={20} />}
+          </button>
+
           {auth ? (
             <div className="relative">
               <button
