@@ -7,11 +7,18 @@ import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import CommentCard from "../components/CommentCard";
 import { useAuth } from "../context/AuthContext";
 import { GoComment } from "react-icons/go";
+import { PiSpeakerHighLight } from "react-icons/pi";
+import { FaRegPauseCircle, FaRegStopCircle } from "react-icons/fa";
+import { FaRegCirclePlay } from "react-icons/fa6";
 
 function BlogDetails() {
   const [blog, setBlog] = useState();
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+
   const { id } = useParams();
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -27,6 +34,12 @@ function BlogDetails() {
 
     fetchABlog();
   }, [id]);
+
+  useEffect(() => {
+    return () => {
+      speechSynthesis.cancel(); // Cleanup speech synthesis on unmount
+    };
+  }, []);
 
   async function handleCommentSubmit(e) {
     e.preventDefault();
@@ -64,6 +77,53 @@ function BlogDetails() {
       setIsLoading(false);
     }
   }
+
+  const handleReadAloud = () => {
+    if (!content) return;
+
+    if (isPaused) {
+      speechSynthesis.resume();
+      setIsSpeaking(true);
+      setIsPaused(false);
+      return;
+    }
+
+    speechSynthesis.cancel();
+
+    const newUtterance = new SpeechSynthesisUtterance(
+      content.slice(currentCharIndex)
+    );
+    newUtterance.lang = "en-US";
+    newUtterance.rate = 1;
+    newUtterance.pitch = 1;
+
+    newUtterance.onboundary = (event) => {
+      setCurrentCharIndex(event.charIndex); // Track the last spoken position
+    };
+
+    newUtterance.onend = () => {
+      setIsSpeaking(false);
+      setCurrentCharIndex(0);
+    };
+
+    speechSynthesis.speak(newUtterance);
+    setIsSpeaking(true);
+  };
+
+  const handlePause = () => {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.pause();
+      setIsSpeaking(false);
+      setIsPaused(true);
+    }
+  };
+
+  const handleStop = () => {
+    speechSynthesis.cancel(); // Stop speech
+    setIsSpeaking(false);
+    setIsPaused(false);
+    setCurrentCharIndex(0);
+  };
 
   if (!blog) return <Spinner />;
 
@@ -107,6 +167,28 @@ function BlogDetails() {
         </div>
 
         <div className="flex gap-8">
+          <div>
+            {isSpeaking ? (
+              <button onClick={handlePause}>
+                <FaRegPauseCircle size={24} />
+              </button>
+            ) : (
+              <button onClick={handleReadAloud}>
+                {isPaused ? (
+                  <FaRegCirclePlay size={24} />
+                ) : (
+                  <PiSpeakerHighLight size={24} />
+                )}
+              </button>
+            )}
+          </div>
+
+          <div>
+            <button onClick={handleStop}>
+              <FaRegStopCircle size={24} />
+            </button>
+          </div>
+
           <div className="flex gap-1">
             <button
               className="cursor-pointer hover:text-red-500"
@@ -135,6 +217,7 @@ function BlogDetails() {
 
       <p className="">{content}</p>
 
+      {/* COMMENT FORM */}
       <form
         className="border p-4 my-10 space-y-4 text-end rounded-md"
         onSubmit={handleCommentSubmit}
@@ -153,6 +236,7 @@ function BlogDetails() {
         </button>
       </form>
 
+      {/* ALL COMMENTS */}
       <div>
         <h1 className="text-xl font-bold tracking-tight">
           Comments ({comments.length})
