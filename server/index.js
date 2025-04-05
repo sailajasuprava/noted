@@ -4,6 +4,7 @@ const { connectDB } = require("./db/db");
 
 const port = process.env.PORT || 3000;
 
+//DATABASE & SERVER CONNECTION
 connectDB()
   .then(() => {
     app.listen(port, () => {

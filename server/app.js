@@ -20,17 +20,20 @@ const corsOptions = {
 
 const app = express();
 
+//MIDDLEWARES
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "4Mb" }));
 app.use(cookieParser());
 app.use(mongoSanitize());
 
+//ROUTES
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/comments", commentRouter);
 
+//CUSTOM ERROR MESSAGE FOR UNHANDLED ROUTES
 app.all("*", (req, res, next) => {
   next(new AppError(`This route ${req.originalUrl} doesn't exist.`, 404));
 });

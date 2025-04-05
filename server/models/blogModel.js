@@ -53,12 +53,14 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
+//VIRTUAL POPULATE
 blogSchema.virtual("comments", {
   ref: "Comment",
   foreignField: "blogId",
   localField: "_id",
 });
 
+//QUERY MIDDLEWARE: runs before all find methods
 blogSchema.pre(/^find/, function (next) {
   this.populate({
     path: "category",
