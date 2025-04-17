@@ -11,23 +11,24 @@
   }
 
   .btn {
-    @apply py-3 w-full font-semibold bg-black hover:bg-gray-700 text-white dark:text-black dark:bg-sky-400 dark:hover:bg-sky-300 duration-300;
+    @apply py-3 w-full font-semibold bg-black hover:bg-gray-700 text-white dark:text-black dark:bg-teal-300 dark:hover:bg-teal-300 duration-300;
   }
   .btn-sm {
-    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold border bg-white hover:bg-gray-300 text-black dark:text-black dark:bg-sky-400 dark:hover:bg-sky-300 duration-300;
+    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold border bg-white hover:bg-gray-300 text-black dark:text-black dark:bg-teal-300 dark:hover:bg-teal-300 duration-300;
   }
 
   .btn-trans {
-    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold border bg-black text-white border-white dark:text-sky-400 dark:border-sky-400 duration-300;
+    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold border bg-black text-white border-white dark:text-teal-300 dark:border-teal-300 duration-300;
   }
 
   .btn-black {
-    @apply pt-2 pb-2.5 px-6 rounded-md font-semibold bg-black text-white hover:bg-gray-600 dark:text-black dark:bg-sky-400 dark:hover:bg-sky-300 duration-300;
+    @apply pt-3 pb-3.5 px-10 rounded-md text-lg font-semibold bg-black text-white hover:bg-gray-600 dark:text-black dark:bg-teal-300 dark:hover:bg-teal-300 duration-300;
   }
 }
 
 @theme {
   --breakpoint-xs: 24rem;
+  --color-primary: #00bdbc;
 }
 
 .active button {
@@ -36,4 +37,17 @@
 
 button {
   cursor: pointer;
+}
+/* For Webkit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000; /* optional: light background */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3c3939; /* black thumb */
+  border-radius: 10px;
 }

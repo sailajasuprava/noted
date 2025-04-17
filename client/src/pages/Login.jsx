@@ -47,8 +47,7 @@ function Login() {
           {isLoading ? (
             <PiSpinnerGapBold
               size={24}
-              fill="white"
-              className="animate-spin mx-auto"
+              className="animate-spin mx-auto text-white dark:text-black"
             />
           ) : (
             "Log in"
@@ -60,7 +59,7 @@ function Login() {
         Don&apos;t have an account?{" "}
         <Link
           to="/signup"
-          className="font-medium text-red-500 dark:text-sky-400 hover:border-b"
+          className="font-medium text-red-500 dark:text-teal-300 hover:border-b"
         >
           Sign up
         </Link>

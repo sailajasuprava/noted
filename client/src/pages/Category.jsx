@@ -36,8 +36,9 @@ function Category() {
 
   return (
     <div className="mt-36 space-y-6">
-      <h1 className="uppercase text-center font-bold bg-gray-100 text-3xl py-10">
-        Category: <span className="text-red-700">{category}</span>
+      <h1 className="uppercase text-center font-bold bg-gray-100 dark:bg-gray-800 text-3xl py-10">
+        Category:{" "}
+        <span className="text-red-700 dark:text-amber-300">{category}</span>
       </h1>
       <div className="w-3xl mx-auto grid grid-cols-2 gap-10">
         {blogsByCategory.map((blog) => (

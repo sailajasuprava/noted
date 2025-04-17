@@ -24,7 +24,9 @@ function BlogCard({ blog }) {
       </div>
 
       <p className="text-xs uppercase py-7">
-        <span className="px-2 bg-black text-white">{categoryName}</span>
+        <span className="px-2 bg-black text-white dark:bg-amber-300 dark:text-black dark:font-semibold">
+          {categoryName}
+        </span>
         <span className="ml-4">{publishedAt}</span>
       </p>
       <Link to={`/blogs/${_id}`}>
@@ -33,8 +35,10 @@ function BlogCard({ blog }) {
         </h2>
       </Link>
 
-      <p className="py-4">{summary}</p>
-      <p className="text-red-500 uppercase text-xs font-bold">{fullname}</p>
+      <p className="py-4 dark:text-gray-300">{summary}</p>
+      <p className="text-red-500 dark:text-amber-300 uppercase text-xs font-bold">
+        {fullname}
+      </p>
     </div>
   );
 }

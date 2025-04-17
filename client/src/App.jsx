@@ -10,8 +10,8 @@ import { useAuth } from "./context/AuthContext";
 import CreateBlog from "./pages/CreateBlog";
 import BlogDetails from "./pages/BlogDetails";
 import SearchResults from "./pages/SearchResults";
-import Profile from "./pages/Profile";
 import Category from "./pages/Category";
+import HomeScreen from "./pages/HomeScreen";
 
 function App() {
   const { auth } = useAuth();
@@ -20,23 +20,20 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
+        <Route path="/" element={<HomeScreen />} />
         <Route element={<AppLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<Home />} />
           <Route
             path="/signup"
-            element={auth ? <Navigate to="/" /> : <Signup />}
+            element={auth ? <Navigate to="/blogs" /> : <Signup />}
           />
           <Route
             path="/login"
-            element={auth ? <Navigate to="/" /> : <Login />}
+            element={auth ? <Navigate to="/blogs" /> : <Login />}
           />
           <Route
             path="/write"
             element={auth ? <CreateBlog /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/profile"
-            element={auth ? <Profile /> : <Navigate to="/login" />}
           />
           <Route path="/category/:category" element={<Category />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />

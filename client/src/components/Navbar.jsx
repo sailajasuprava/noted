@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
-import { CiEdit, CiLogout, CiUser } from "react-icons/ci";
+import { CiEdit, CiLogout } from "react-icons/ci";
 import FilterChipBar from "./FilterChipBar";
 import { IoIosSunny } from "react-icons/io";
 import { LuMoonStar } from "react-icons/lu";
@@ -58,15 +58,6 @@ function Navbar() {
                         <CiEdit size={22} />
                       </span>
                       <span>Write</span>
-                    </li>
-                  </Link>
-
-                  <Link to="/profile">
-                    <li className="px-4 py-2 hover:bg-gray-800 flex items-center gap-2">
-                      <span>
-                        <CiUser size={22} />
-                      </span>
-                      <span>Profile</span>
                     </li>
                   </Link>
 

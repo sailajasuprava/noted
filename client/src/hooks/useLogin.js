@@ -31,7 +31,7 @@ function useLogin() {
       localStorage.setItem("noted", JSON.stringify(res.data.data));
       setAuth(res.data.data);
       setFormData(initialState);
-      navigate("/");
+      navigate("/blogs");
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

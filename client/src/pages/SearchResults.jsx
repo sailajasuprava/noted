@@ -51,7 +51,9 @@ function SearchResults() {
     <div className="max-w-3xl mx-auto mt-40">
       <p className="text-2xl pb-10">
         Search results for{" "}
-        <span className="font-semibold">&quot;{searchTerm}&quot;</span>
+        <span className="font-semibold text-amber-300">
+          &quot;{searchTerm}&quot;
+        </span>
       </p>
 
       <div className="grid grid-cols-2 gap-10">

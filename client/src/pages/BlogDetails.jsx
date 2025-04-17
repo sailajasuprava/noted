@@ -153,10 +153,12 @@ function BlogDetails() {
 
       <div className="text-xs uppercase py-7 flex justify-between">
         <div>
-          <span className="px-2 bg-black text-white">{categoryName}</span>
+          <span className="px-2 bg-black text-white dark:bg-[#f79c0d] dark:text-black dark:font-semibold">
+            {categoryName}
+          </span>
           <span className="ml-4">{publishedAt}</span>
         </div>
-        <div className="text-red-500 uppercase text-xs font-bold">
+        <div className="text-red-500 dark:text-[#f79c0d] uppercase text-xs font-bold">
           {fullname}
         </div>
       </div>
@@ -170,12 +172,12 @@ function BlogDetails() {
           <div>
             {isSpeaking ? (
               <button onClick={handlePause}>
-                <FaRegPauseCircle size={24} />
+                <FaRegPauseCircle size={24} strokeWidth={0.5} />
               </button>
             ) : (
               <button onClick={handleReadAloud}>
                 {isPaused ? (
-                  <FaRegCirclePlay size={24} />
+                  <FaRegCirclePlay size={24} strokeWidth={0.5} />
                 ) : (
                   <PiSpeakerHighLight size={24} />
                 )}
@@ -185,7 +187,7 @@ function BlogDetails() {
 
           <div>
             <button onClick={handleStop}>
-              <FaRegStopCircle size={24} />
+              <FaRegStopCircle size={24} strokeWidth={0.5} />
             </button>
           </div>
 
@@ -215,7 +217,7 @@ function BlogDetails() {
         {title}
       </h1>
 
-      <p className="">{content}</p>
+      <p className="dark:text-gray-300">{content}</p>
 
       {/* COMMENT FORM */}
       <form
