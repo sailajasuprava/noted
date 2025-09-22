@@ -9,11 +9,9 @@ const generateAndSendToken = (res, id) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  res.cookie("noted", token, {
+  res.cookie(process.env.COOKIE_NAME, token, {
     maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "strict",
-    secure: process.env.NODE_ENV !== "development",
   });
 };
 
@@ -35,6 +33,7 @@ const signUp = async (req, res, next) => {
       data: {
         _id: newUser._id,
         fullname: newUser.fullname,
+        email: newUser.email,
       },
     });
   } catch (err) {
@@ -63,6 +62,7 @@ const logIn = async (req, res, next) => {
       data: {
         _id: user._id,
         fullname: user.fullname,
+        email: user.email,
       },
     });
   } catch (err) {
@@ -107,11 +107,22 @@ const restrictTo =
   };
 
 const logOut = (req, res) => {
-  res.cookie("noted", "", { maxAge: 0 });
+  res.cookie(process.env.COOKIE_NAME, "", { maxAge: 0 });
   res.status(200).json({
     status: "success",
     message: "Logged out successfully",
   });
 };
 
-module.exports = { signUp, logIn, logOut, protect, restrictTo };
+const getProfile = (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      _id: req.user._id,
+      fullname: req.user.fullname,
+      email: req.user.email,
+    },
+  });
+};
+
+module.exports = { signUp, logIn, logOut, protect, restrictTo, getProfile };

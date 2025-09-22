@@ -9,7 +9,6 @@ function BlogCard({ blog }) {
     summary,
     _id,
   } = blog;
-  console.log(blog);
 
   const publishedAt = new Date(createdAt).toLocaleDateString("en-US", {
     month: "short",

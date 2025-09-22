@@ -10,7 +10,6 @@ function CategoryProvider({ children }) {
   useEffect(() => {
     fetchAllCategories();
   }, []);
-  console.log(categories);
 
   async function fetchAllCategories() {
     try {

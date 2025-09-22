@@ -32,7 +32,6 @@ function useSignup() {
       setIsLoading(true);
       const res = await axios.post("/auth/signup", formData);
       toast.success(res.data.message);
-      localStorage.setItem("noted", JSON.stringify(res.data.data));
       setAuth(res.data.data);
       setFormData(initialState);
       navigate("/blogs");

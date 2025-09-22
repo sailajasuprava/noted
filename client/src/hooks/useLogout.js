@@ -12,7 +12,6 @@ function useLogout() {
       setIsLoading(true);
       const res = await axios.get("/auth/logout");
       toast.success(res.data.message);
-      localStorage.removeItem("noted");
       setAuth(null);
     } catch (error) {
       toast.error(error.response.data.message);
