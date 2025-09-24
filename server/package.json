@@ -19,6 +19,7 @@
     "express-mongo-sanitize": "^2.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^5.13.22",
+    "redis": "^5.8.2",
     "validator": "^13.12.0"
   },
   "devDependencies": {
