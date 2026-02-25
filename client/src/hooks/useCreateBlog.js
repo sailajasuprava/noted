@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "../lib/axios";
 import { generateSummary } from "../lib/gemini";
+import { useBlog } from "../context/BlogContext";
 
 const initialState = {
   title: "",
@@ -15,6 +16,7 @@ function useCreateBlog() {
   const [formData, setFormData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const { setBlogs } = useBlog();
 
   function handleFormData(e) {
     setFormData((prev) => {
@@ -31,6 +33,7 @@ function useCreateBlog() {
       setIsLoading(true);
       const res = await axios.post("/blogs", formData);
       toast.success(res.data.message);
+      setBlogs((prev) => [res.data.data, ...prev]);
       setFormData(initialState);
     } catch (error) {
       toast.error(error.response.data.message);

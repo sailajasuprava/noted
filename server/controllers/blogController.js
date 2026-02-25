@@ -6,6 +6,7 @@ const redisClient = require("../utils/redis");
 const getAllBlogs = async (req, res, next) => {
   try {
     const page = req.query.page * 1 || 1;
+
     const limit = 2;
     const skip = (page - 1) * limit;
 
@@ -24,7 +25,6 @@ const getAllBlogs = async (req, res, next) => {
       .skip(skip)
       .limit(limit)
       .sort("-createdAt");
-
     const totalBlogs = await Blog.countDocuments(filter);
 
     if (!blogs) {
@@ -91,19 +91,16 @@ const getBlog = async (req, res, next) => {
       data: blog,
     });
   } catch (err) {
-    console.log(err);
-
     next(err);
   }
 };
 
 const createBlog = async (req, res, next) => {
   try {
-    const { title, category, content, summary, banner } = req.body;
+    const { title, content, category, summary, banner } = req.body;
     const { _id } = req.user;
 
     let cloudinaryResponse = null;
-
     if (banner) {
       cloudinaryResponse = await cloudinary.uploader.upload(banner, {
         folder: "blogs",
@@ -112,8 +109,8 @@ const createBlog = async (req, res, next) => {
 
     const newBlog = await Blog.create({
       title,
-      category,
       content,
+      category,
       summary,
       banner: cloudinaryResponse.secure_url
         ? cloudinaryResponse.secure_url
@@ -135,14 +132,12 @@ const updateBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
     const redisKey = `blog:${blogId}`;
-
     const blog = await Blog.findByIdAndUpdate(blogId, req.body, {
       new: true,
       runValidators: true,
     });
 
     await redisClient.del(redisKey);
-
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));
     }
@@ -161,14 +156,13 @@ const deleteBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
     const redisKey = `blog:${blogId}`;
-
     const blog = await Blog.findByIdAndDelete(blogId);
+
+    await redisClient.del(redisKey);
 
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));
     }
-
-    await redisClient.del(redisKey);
 
     res.status(200).json({
       status: "success",
@@ -183,8 +177,9 @@ const likeBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
     const redisKey = `blog:${blogId}`;
-
     const blog = await Blog.findById(blogId);
+
+    await redisClient.del(redisKey);
 
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));
@@ -201,8 +196,6 @@ const likeBlog = async (req, res, next) => {
     }
 
     await blog.save({ validateBeforeSave: false });
-
-    await redisClient.del(redisKey);
 
     res.status(200).json({
       status: "success",
