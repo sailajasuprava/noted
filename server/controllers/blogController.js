@@ -1,7 +1,7 @@
 const cloudinary = require("../utils/cloudinary");
 const Blog = require("../models/blogModel");
 const AppError = require("../utils/appArror");
-const redisClient = require("../utils/redis");
+// const redisClient = require("../utils/redis");
 
 const getAllBlogs = async (req, res, next) => {
   try {
@@ -63,16 +63,16 @@ const getBlogsByCategory = async (req, res, next) => {
 const getBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
-    const redisKey = `blog:${blogId}`;
+    // const redisKey = `blog:${blogId}`;
 
-    const cachedBlog = await redisClient.json.get(redisKey);
+    // const cachedBlog = await redisClient.json.get(redisKey);
 
-    if (cachedBlog) {
-      return res.status(200).json({
-        status: "success",
-        data: cachedBlog,
-      });
-    }
+    // if (cachedBlog) {
+    //   return res.status(200).json({
+    //     status: "success",
+    //     data: cachedBlog,
+    //   });
+    // }
 
     const blog = await Blog.findById(blogId).populate({
       path: "comments",
@@ -83,8 +83,8 @@ const getBlog = async (req, res, next) => {
       return next(new AppError("No blog found with that ID", 404));
     }
 
-    await redisClient.json.set(redisKey, "$", blog);
-    await redisClient.expire(redisKey, 60 * 60 * 24);
+    // await redisClient.json.set(redisKey, "$", blog);
+    // await redisClient.expire(redisKey, 60 * 60 * 24);
 
     res.status(200).json({
       status: "success",
@@ -131,13 +131,13 @@ const createBlog = async (req, res, next) => {
 const updateBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
-    const redisKey = `blog:${blogId}`;
+    // const redisKey = `blog:${blogId}`;
     const blog = await Blog.findByIdAndUpdate(blogId, req.body, {
       new: true,
       runValidators: true,
     });
 
-    await redisClient.del(redisKey);
+    // await redisClient.del(redisKey);
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));
     }
@@ -155,10 +155,10 @@ const updateBlog = async (req, res, next) => {
 const deleteBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
-    const redisKey = `blog:${blogId}`;
+    // const redisKey = `blog:${blogId}`;
     const blog = await Blog.findByIdAndDelete(blogId);
 
-    await redisClient.del(redisKey);
+    // await redisClient.del(redisKey);
 
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));
@@ -176,10 +176,10 @@ const deleteBlog = async (req, res, next) => {
 const likeBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
-    const redisKey = `blog:${blogId}`;
+    // const redisKey = `blog:${blogId}`;
     const blog = await Blog.findById(blogId);
 
-    await redisClient.del(redisKey);
+    // await redisClient.del(redisKey);
 
     if (!blog) {
       return next(new AppError("No blog found with that ID", 404));
