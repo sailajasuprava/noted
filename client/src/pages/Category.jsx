@@ -3,7 +3,7 @@ import { useCategory } from "../context/CategoryContext";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "../lib/axios";
-import BlogCard from "../components/BlogCard";
+import BlogCard from "../components/v1/BlogCard";
 
 function Category() {
   const { category } = useParams();
@@ -11,7 +11,7 @@ function Category() {
   const [isLoading, setIsLoading] = useState(false);
   const [blogsByCategory, setBlogsByCategory] = useState([]);
   const filteredCategory = categories.filter(
-    (item) => item.categoryName === category
+    (item) => item.categoryName === category,
   );
 
   const categoryId = filteredCategory[0]?._id;

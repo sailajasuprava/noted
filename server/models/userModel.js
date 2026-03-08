@@ -6,20 +6,24 @@ const userSchema = new mongoose.Schema(
   {
     fullname: {
       type: String,
-      required: [true, "fullname is a required field."],
+      required: [true, "Fullname is a required field."],
       trim: true,
     },
     email: {
       type: String,
-      required: [true, "email is a required field."],
-      lowercase: true,
+      required: [true, "Email is a required field."],
       unique: true,
+      lowercase: true,
       validate: [validator.isEmail, "Please provide a valid email."],
     },
     role: {
       type: String,
       enum: ["customer", "admin"],
       default: "customer",
+    },
+    avatar: {
+      type: String,
+      default: "https://i.pravatar.cc/150?u=seraphina",
     },
     password: {
       type: String,
@@ -40,7 +44,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 //DOCUMENT MIDDLEWARE: runs before .save() and .create()

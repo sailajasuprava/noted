@@ -19,7 +19,7 @@ function useLogout() {
       setIsLoading(false);
     }
   }
-  return { isLoading, handleLogout };
+  return { handleLogout, isLoading };
 }
 
 export default useLogout;

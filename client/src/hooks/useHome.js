@@ -23,7 +23,7 @@ function useHome() {
       setIsLoading(true);
       const res = await axios.get(`/blogs?page=${page}&category=${active}`);
       if (page === 1) {
-        setBlogs([...res.data.data]); // Reset blogs when category changes
+        setBlogs(res.data.data); // Reset blogs when category changes
       } else {
         setBlogs((prev) => [...prev, ...res.data.data]); // Append more blogs
       }
@@ -36,6 +36,7 @@ function useHome() {
       setIsLoading(false);
     }
   }
+
   return {
     active,
     setActive,

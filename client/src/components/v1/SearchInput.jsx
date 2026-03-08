@@ -21,7 +21,7 @@ function SearchInput() {
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="px-4 pt-1 pb-2 border-2 border-gray-300 rounded-full w-full sm:w-auto"
+        className="px-4 pt-1 pb-2  border-2 border-gray-300 rounded-full w-full sm:w-auto"
       />
       <IoSearch className="absolute right-4 top-1/2 -translate-y-1/2" />
     </div>

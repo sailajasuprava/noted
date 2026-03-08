@@ -12,21 +12,22 @@ const blogSchema = new mongoose.Schema(
     },
     banner: {
       type: String,
-      required: [true, "Banner is required"],
+      required: [true, "Banner is required."],
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      required: [true, "Category is required"],
+      required: [true, "Category is required."],
     },
+
     content: {
       type: String,
-      required: [true, "Content is required."],
+      required: [true, "Content is required"],
       minlength: [400, "Content must be at least 400 characters long."],
     },
     summary: {
       type: String,
-      required: [true, "summary is required."],
+      required: [true, "summary is required"],
       minlength: [120, "summary must be at least 120 characters long."],
     },
     author: {
@@ -50,7 +51,7 @@ const blogSchema = new mongoose.Schema(
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 //VIRTUAL POPULATE
@@ -67,7 +68,7 @@ blogSchema.pre(/^find/, function (next) {
     select: "categoryName",
   }).populate({
     path: "author",
-    select: "fullname",
+    select: "fullname avatar",
   });
   next();
 });

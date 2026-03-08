@@ -1,10 +1,11 @@
 import { useRef } from "react";
-import { FaAngleRight, FaChevronLeft } from "react-icons/fa";
-import { useCategory } from "../context/CategoryContext";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { useCategory } from "../../context/CategoryContext";
 import { NavLink } from "react-router-dom";
 
 export default function FilterChipBar() {
   const { categories } = useCategory();
+
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
@@ -15,15 +16,16 @@ export default function FilterChipBar() {
       });
     }
   };
+
   if (!categories.length) return;
 
   return (
     <div className="relative flex items-center w-full overflow-hidden mt-8">
       <button
         onClick={() => scroll("left")}
-        className="absolute left-0 z-[8] shadow-md rounded-full p-2"
+        className="absolute left-0 z-[8]  shadow-md rounded-full p-2"
       >
-        <FaChevronLeft />
+        <FaAngleLeft />
       </button>
 
       <div
@@ -43,7 +45,7 @@ export default function FilterChipBar() {
 
       <button
         onClick={() => scroll("right")}
-        className="absolute right-0 z-[8] shadow-md rounded-full p-2"
+        className="absolute right-0 z-[8]  shadow-md rounded-full p-2"
       >
         <FaAngleRight />
       </button>

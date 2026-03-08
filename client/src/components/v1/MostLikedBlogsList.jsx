@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useBlog } from "../context/BlogContext";
-import Spinner from "./Spinner";
+import { useBlog } from "../../context/BlogContext";
+import Spinner from "../Spinner";
 
 function MostLikedBlogsList() {
   const { mostLikedBlogs } = useBlog();

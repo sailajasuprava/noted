@@ -21,12 +21,7 @@ function CategoryProvider({ children }) {
   }
 
   return (
-    <CategoryContext.Provider
-      value={{
-        categories,
-        setCategories,
-      }}
-    >
+    <CategoryContext.Provider value={{ categories, setCategories }}>
       {children}
     </CategoryContext.Provider>
   );
@@ -34,7 +29,7 @@ function CategoryProvider({ children }) {
 
 export function useCategory() {
   const context = useContext(CategoryContext);
-  if (!context) throw new Error("CategoryContext used outside of provider.");
+  if (!context) throw new Error("CategoryContext used outside of provider");
   return context;
 }
 

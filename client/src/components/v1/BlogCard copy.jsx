@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 function BlogCard({ blog }) {
   const {
     author: { fullname },
@@ -24,7 +25,6 @@ function BlogCard({ blog }) {
             {title}
           </h1>
         </Link>
-
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
             <img
@@ -32,7 +32,6 @@ function BlogCard({ blog }) {
               alt="profilePic"
               className="h-10 w-10 rounded-full object-cover"
             />
-
             <div>
               <p className="font-semibold">{fullname}</p>
               <p className="text-sm">{publishedAt}</p>
@@ -42,8 +41,7 @@ function BlogCard({ blog }) {
           <div className="uppercase text-sm">{categoryName}</div>
         </div>
       </div>
-
-      <div className="h-28 w-32">
+      <div className="h-28 w-32 ">
         <img src={banner} alt="banner" className="h-full w-full object-cover" />
       </div>
     </div>

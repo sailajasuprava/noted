@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { PiSpinnerGapBold } from "react-icons/pi";
-import useSignup from "../hooks/useSignup";
+import useSignup from "../../hooks/useSignup";
 
 function Signup() {
   const { formData, isLoading, handleFormData, handleFormSubmission } =

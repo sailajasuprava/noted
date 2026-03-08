@@ -8,6 +8,7 @@ function useSearchResults() {
   const [searchPage, setSearchPage] = useState(1);
   const [hasMore, setHasMore] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get("q");
 
@@ -34,13 +35,14 @@ function useSearchResults() {
       setIsLoading(false);
     }
   }
+
   return {
     searchResults,
     searchPage,
     hasMore,
     isLoading,
-    fetchBlogsBySearch,
     searchTerm,
+    fetchBlogsBySearch,
   };
 }
 

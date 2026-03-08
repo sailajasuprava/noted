@@ -7,7 +7,7 @@ const getAllBlogs = async (req, res, next) => {
   try {
     const page = req.query.page * 1 || 1;
 
-    const limit = 2;
+    const limit = 9;
     const skip = (page - 1) * limit;
 
     const filter = {};
@@ -21,7 +21,7 @@ const getAllBlogs = async (req, res, next) => {
     }
 
     const blogs = await Blog.find(filter)
-      .select("banner title summary category createdAt")
+      .select("banner title content summary category createdAt")
       .skip(skip)
       .limit(limit)
       .sort("-createdAt");
@@ -31,9 +31,16 @@ const getAllBlogs = async (req, res, next) => {
       return next(new AppError("No blogs found", 404));
     }
 
+    // res.status(200).json({
+    //   status: "success",
+    //   hasMore: totalBlogs > page * limit,
+    //   data: blogs,
+    // });
     res.status(200).json({
       status: "success",
       hasMore: totalBlogs > page * limit,
+      totalBlogs,
+      totalPages: Math.ceil(totalBlogs / limit),
       data: blogs,
     });
   } catch (err) {

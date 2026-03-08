@@ -1,6 +1,6 @@
-import BlogCard from "../components/BlogCard";
-import Spinner from "../components/Spinner";
-import useSearchResults from "../hooks/useSearchResults";
+import BlogCard from "../../components/v1/BlogCard";
+import Spinner from "../../components/Spinner";
+import useSearchResults from "../../hooks/useSearchResults";
 
 function SearchResults() {
   const {
@@ -11,7 +11,6 @@ function SearchResults() {
     searchTerm,
     fetchBlogsBySearch,
   } = useSearchResults();
-
   if (isLoading) return <Spinner />;
 
   return (
@@ -27,12 +26,12 @@ function SearchResults() {
         <p className="text-5xl font-semibold text-gray-500">No blogs found!</p>
       ) : (
         <>
-          {" "}
           <div className="grid grid-cols-2 gap-10">
             {searchResults.map((blog) => (
               <BlogCard key={blog._id} blog={blog} />
             ))}
           </div>
+
           {hasMore ? (
             <button
               onClick={() => fetchBlogsBySearch(searchPage + 1)}

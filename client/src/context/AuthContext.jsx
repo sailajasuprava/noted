@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "../lib/axios";
 
 const AuthContext = createContext();
@@ -28,7 +28,7 @@ function AuthProvider({ children }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("AuthContext used outside of provider.");
+  if (!context) throw new Error("AuthContext used outside of provider");
   return context;
 }
 
