@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 function BlogCard({ blog }) {
   const {
@@ -57,7 +58,11 @@ function BlogCard({ blog }) {
 
         {/* Excerpt */}
         <p className="text-slate-500 text-sm line-clamp-2 mb-6 leading-relaxed font-medium">
-          {content}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(content),
+            }}
+          />
         </p>
 
         {/* Bottom Metadata - Matches the icon layout in screenshot */}

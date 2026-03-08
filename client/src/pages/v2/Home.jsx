@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useCategory } from "../../context/CategoryContext";
 import { useBlog } from "../../context/BlogContext";
 import Spinner from "../../components/Spinner";
 import BlogCard from "../../components/v2/BlogCard";
 import { useEffect } from "react";
 
 const Home = () => {
-  const [activeCategory, setActiveCategory] = useState("business");
   const [page, setPage] = useState(1);
-  const { categories } = useCategory();
-  const { blogs, fetchAllBlogs, hasMore, search, setSearch } = useBlog();
+  const {
+    blogs,
+    fetchAllBlogs,
+    hasMore,
+    search,
+    setSearch,
+    categories,
+    activeCategory,
+    setActiveCategory,
+  } = useBlog();
 
   useEffect(() => {
     fetchAllBlogs(page);
@@ -42,12 +48,30 @@ const Home = () => {
         {/* --- FILTER BAR --- */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 border-b border-gray-200 pb-6">
           <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => {
+                setActiveCategory("all");
+                setPage(1);
+                fetchAllBlogs(1, search, "all");
+              }}
+              className={`px-5 py-2 rounded-md text-xs font-semibold uppercase transition-all ${
+                activeCategory === "all"
+                  ? "bg-gray-100 text-gray-900 shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              All
+            </button>
             {categories.map((cat) => (
               <button
                 key={cat._id}
-                onClick={() => setActiveCategory(cat.categoryName)}
+                onClick={() => {
+                  setActiveCategory(cat._id);
+                  setPage(1);
+                  fetchAllBlogs(1, search, cat._id);
+                }}
                 className={`px-5 py-2 rounded-md text-xs font-semibold uppercase transition-all ${
-                  activeCategory === cat.categoryName
+                  activeCategory === cat._id
                     ? "bg-gray-100 text-gray-900 shadow-sm"
                     : "text-gray-600 hover:text-gray-900"
                 }`}
@@ -85,8 +109,6 @@ const Home = () => {
           </div>
 
           {/* --- PAGINATION --- */}
-          {/* --- PAGINATION --- */}
-
           <div className="mt-20 flex justify-center items-center gap-3">
             <button
               disabled={page === 1}

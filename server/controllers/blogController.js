@@ -11,7 +11,11 @@ const getAllBlogs = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     const filter = {};
-    const { search } = req.query;
+    const { search, category } = req.query;
+
+    if (category && category !== "all") {
+      filter.category = category;
+    }
 
     if (search) {
       filter.$or = [
@@ -31,11 +35,6 @@ const getAllBlogs = async (req, res, next) => {
       return next(new AppError("No blogs found", 404));
     }
 
-    // res.status(200).json({
-    //   status: "success",
-    //   hasMore: totalBlogs > page * limit,
-    //   data: blogs,
-    // });
     res.status(200).json({
       status: "success",
       hasMore: totalBlogs > page * limit,

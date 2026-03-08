@@ -49,8 +49,10 @@ function useCreateBlog() {
       toast.error("Title must be between 3-100 characters.");
       return false;
     }
-    if (content.length < 400) {
-      toast.error("Content must be of at least 400 characters.");
+    const plainText = content.replace(/<[^>]+>/g, "");
+
+    if (plainText.length < 400) {
+      toast.error("Content must be at least 400 characters.");
       return false;
     }
 

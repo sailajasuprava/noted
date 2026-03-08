@@ -14,6 +14,7 @@ import {
   FaUserCircle,
 } from "react-icons/fa"; // Added FaUserCircle
 import { FaRegCirclePlay } from "react-icons/fa6";
+import DOMPurify from "dompurify";
 
 function BlogDetails() {
   const [blog, setBlog] = useState();
@@ -238,11 +239,11 @@ function BlogDetails() {
             {/* Article Content */}
             <main className="lg:col-span-8">
               <article className="prose prose-slate max-w-none text-gray-600 leading-relaxed text-lg">
-                {content.split("\n").map((para, i) => (
-                  <p key={i} className="mb-6">
-                    {para}
-                  </p>
-                ))}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(content),
+                  }}
+                />
               </article>
 
               {/* Comment Section */}

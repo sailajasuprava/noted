@@ -5,49 +5,42 @@ import axios from "../lib/axios";
 const BlogContext = createContext();
 
 function BlogProvider({ children }) {
-  const [active, setActive] = useState("all");
   const [blogs, setBlogs] = useState([]);
   const [mostLikedBlogs, setMostLikedBlogs] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
-    fetchAllBlogs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
+    fetchAllCategories();
+  }, []);
 
   useEffect(() => {
     fetchMostLikedBlogs();
   }, []);
 
-  const handleCategoryClick = (category) => {
-    setActive(category);
-    setBlogs([]);
-    setPage(1);
-  };
+  async function fetchAllCategories() {
+    try {
+      const res = await axios.get(`/categories`);
+      setCategories(res.data.data);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
 
-  // async function fetchAllBlogs() {
-  //   try {
-  //     setIsLoading(true);
-  //     const res = await axios.get(`/blogs?page=${page}&category=${active}`);
-  //     setBlogs((prev) => [...prev, ...res.data.data]);
-  //     setHasMore(res.data.hasMore);
-  //     setPage((prev) => prev + 1);
-  //   } catch (error) {
-  //     toast.error(error.response.data.message);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
-
-  async function fetchAllBlogs(pageNumber = 1, keyword = search) {
+  async function fetchAllBlogs(
+    pageNumber = 1,
+    keyword = search,
+    category = activeCategory,
+  ) {
     try {
       setIsLoading(true);
 
       const res = await axios.get(
-        `/blogs?page=${pageNumber}&search=${keyword}`,
+        `/blogs?page=${pageNumber}&search=${keyword}&category=${category}`,
       );
 
       setBlogs(res.data.data);
@@ -70,8 +63,6 @@ function BlogProvider({ children }) {
   return (
     <BlogContext.Provider
       value={{
-        active,
-        setActive,
         blogs,
         setBlogs,
         page,
@@ -81,10 +72,13 @@ function BlogProvider({ children }) {
         isLoading,
         setIsLoading,
         fetchAllBlogs,
-        handleCategoryClick,
         mostLikedBlogs,
         search,
         setSearch,
+        categories,
+        setCategories,
+        activeCategory,
+        setActiveCategory,
       }}
     >
       {children}

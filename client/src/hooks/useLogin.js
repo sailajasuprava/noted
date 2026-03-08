@@ -30,7 +30,7 @@ function useLogin() {
       toast.success(res.data.message);
       setAuth(res.data.data);
       setFormData(initialState);
-      navigate("/blogs");
+      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
