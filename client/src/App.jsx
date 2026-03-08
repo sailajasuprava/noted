@@ -4,16 +4,15 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 import AppLayout from "./components/AppLayout";
 import { useAuth } from "./context/AuthContext";
+import About from "./pages/v2/About";
 
 // Lazy-loaded pages
 const Signup = lazy(() => import("./pages/v2/Signup"));
 const Login = lazy(() => import("./pages/v2/Login"));
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const PageNotFound = lazy(() => import("./pages/v2/PageNotFound"));
 const CreateBlog = lazy(() => import("./pages/CreateBlog"));
 const BlogDetails = lazy(() => import("./pages/v2/BlogDetails"));
-const SearchResults = lazy(() => import("./pages/v1/SearchResults"));
-const Category = lazy(() => import("./pages/Category"));
-const Home2 = lazy(() => import("./pages/v2/Home"));
+const Home = lazy(() => import("./pages/v2/Home"));
 
 function App() {
   const { auth } = useAuth();
@@ -25,22 +24,22 @@ function App() {
       <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Home2 />} />
+            <Route path="/" element={<Home />} />
             <Route
               path="/signup"
-              element={auth ? <Navigate to="/blogs" /> : <Signup />}
+              element={auth ? <Navigate to="/" /> : <Signup />}
             />
             <Route
               path="/login"
-              element={auth ? <Navigate to="/blogs" /> : <Login />}
+              element={auth ? <Navigate to="/" /> : <Login />}
             />
             <Route
               path="/write"
               element={auth ? <CreateBlog /> : <Navigate to="/login" />}
             />
-            <Route path="/category/:category" element={<Category />} />
+
             <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/search" element={<SearchResults />} />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

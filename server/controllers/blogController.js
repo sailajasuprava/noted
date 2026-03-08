@@ -47,25 +47,6 @@ const getAllBlogs = async (req, res, next) => {
   }
 };
 
-const getBlogsByCategory = async (req, res, next) => {
-  try {
-    const { categoryId } = req.params;
-    const blogs = await Blog.find({ category: categoryId }).sort("-createdAt");
-
-    if (!blogs) {
-      return next(new AppError("No blogs found", 404));
-    }
-
-    res.status(200).json({
-      status: "success",
-      results: blogs.length,
-      data: blogs,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 const getBlog = async (req, res, next) => {
   try {
     const { blogId } = req.params;
@@ -239,7 +220,6 @@ const mostLikedBlogs = async (req, res, next) => {
 
 module.exports = {
   getAllBlogs,
-  getBlogsByCategory,
   getBlog,
   createBlog,
   updateBlog,

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import axios from "../lib/axios";
-import Spinner from "../components/Spinner";
+import axios from "../../lib/axios";
+import Spinner from "../../components/Spinner";
 import { useParams, useNavigate } from "react-router-dom";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
-import CommentCard from "../components/CommentCard";
-import { useAuth } from "../context/AuthContext";
+import CommentCard from "../../components/CommentCard";
+import { useAuth } from "../../context/AuthContext";
 import { GoComment } from "react-icons/go";
 import { PiSpeakerHighLight } from "react-icons/pi";
 import { FaRegPauseCircle, FaRegStopCircle } from "react-icons/fa";
@@ -91,7 +91,7 @@ function BlogDetails() {
     speechSynthesis.cancel();
 
     const newUtterance = new SpeechSynthesisUtterance(
-      content.slice(currentCharIndex)
+      content.slice(currentCharIndex),
     );
     newUtterance.lang = "en-US";
     newUtterance.rate = 1;

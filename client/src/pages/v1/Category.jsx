@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useCategory } from "../context/CategoryContext";
+import { useCategory } from "../../context/CategoryContext";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import axios from "../lib/axios";
-import BlogCard from "../components/v1/BlogCard";
+import axios from "../../lib/axios";
+import BlogCard from "../../components/v1/BlogCard";
 
 function Category() {
   const { category } = useParams();
