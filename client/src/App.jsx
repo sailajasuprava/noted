@@ -10,7 +10,7 @@ import About from "./pages/v2/About";
 const Signup = lazy(() => import("./pages/v2/Signup"));
 const Login = lazy(() => import("./pages/v2/Login"));
 const PageNotFound = lazy(() => import("./pages/v2/PageNotFound"));
-const CreateBlog = lazy(() => import("./pages/CreateBlog"));
+const CreateBlog = lazy(() => import("./pages/v2/CreateBlog"));
 const BlogDetails = lazy(() => import("./pages/v2/BlogDetails"));
 const Home = lazy(() => import("./pages/v2/Home"));
 

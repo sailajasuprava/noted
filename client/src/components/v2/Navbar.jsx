@@ -8,7 +8,6 @@ import { HiOutlinePencilAlt, HiOutlineLogout } from "react-icons/hi";
 const navItems = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Blog", path: "/blogs" },
 ];
 
 function Navbar() {

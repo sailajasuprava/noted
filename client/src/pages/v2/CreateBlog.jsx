@@ -1,5 +1,5 @@
-import { useBlog } from "../context/BlogContext";
-import useCreateBlog from "../hooks/useCreateBlog";
+import { useBlog } from "../../context/BlogContext";
+import useCreateBlog from "../../hooks/useCreateBlog";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import {
