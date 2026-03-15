@@ -31,16 +31,6 @@ const userSchema = new mongoose.Schema(
       minlength: [8, "Password must have atleast 8 characters."],
       select: false,
     },
-    passwordConfirm: {
-      type: String,
-      required: [true, "Please confirm your password."],
-      validate: {
-        validator: function (val) {
-          return val === this.password;
-        },
-        message: "Passwords are not the same.",
-      },
-    },
   },
   {
     timestamps: true,
@@ -50,7 +40,6 @@ const userSchema = new mongoose.Schema(
 //DOCUMENT MIDDLEWARE: runs before .save() and .create()
 userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
-  this.passwordConfirm = undefined;
   next();
 });
 

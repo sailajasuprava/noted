@@ -17,11 +17,15 @@ const generateAndSendToken = (res, id) => {
 const signUp = async (req, res, next) => {
   try {
     const { fullname, email, password, passwordConfirm } = req.body;
+
+    if (password !== passwordConfirm) {
+      return next(new AppError("Passwords don't match", 401));
+    }
+
     const newUser = await User.create({
       fullname,
       email,
       password,
-      passwordConfirm,
     });
 
     generateAndSendToken(res, newUser._id);
@@ -33,6 +37,7 @@ const signUp = async (req, res, next) => {
         _id: newUser._id,
         fullname: newUser.fullname,
         email: newUser.email,
+        avatar: newUser.avatar,
       },
     });
   } catch (err) {
@@ -63,6 +68,7 @@ const logIn = async (req, res, next) => {
         _id: user._id,
         fullname: user.fullname,
         email: user.email,
+        avatar: user.avatar,
       },
     });
   } catch (err) {
