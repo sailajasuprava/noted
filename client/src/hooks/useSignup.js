@@ -56,7 +56,17 @@ function useSignup() {
 
     return true;
   }
-  return { formData, isLoading, handleFormData, handleFormSubmission };
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${import.meta.env.VITE_SERVER_URL}/api/auth/google`;
+  };
+  return {
+    formData,
+    isLoading,
+    handleFormData,
+    handleFormSubmission,
+    handleGoogleLogin,
+  };
 }
 
 export default useSignup;

@@ -4,8 +4,13 @@ import useSignup from "../../hooks/useSignup";
 import { FcGoogle } from "react-icons/fc";
 
 function Signup() {
-  const { formData, isLoading, handleFormData, handleFormSubmission } =
-    useSignup();
+  const {
+    formData,
+    isLoading,
+    handleFormData,
+    handleFormSubmission,
+    handleGoogleLogin,
+  } = useSignup();
 
   return (
     // Page background is a soft gray, creating clear separation from your gradient navbar
@@ -116,6 +121,7 @@ function Signup() {
         {/* Google Button */}
         <button
           type="button"
+          onClick={handleGoogleLogin}
           className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold py-3 rounded-xl transition-all shadow-sm"
         >
           <FcGoogle size={20} />

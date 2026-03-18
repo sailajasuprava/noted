@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
 
 function Login() {
-  const { formData, isLoading, handleFormData, handleFormSubmission } =
-    useLogin();
+  const {
+    formData,
+    isLoading,
+    handleFormData,
+    handleFormSubmission,
+    handleGoogleLogin,
+  } = useLogin();
 
   return (
     // Page background is a soft gray, creating clear separation from your gradient navbar
@@ -89,6 +94,7 @@ function Login() {
         {/* Google Button */}
         <button
           type="button"
+          onClick={handleGoogleLogin}
           className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold py-3 rounded-xl transition-all shadow-sm"
         >
           <FcGoogle size={20} />

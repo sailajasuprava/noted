@@ -25,10 +25,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://i.pravatar.cc/150?u=seraphina",
     },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows multiple nulls for users who signed up via email
+    },
     password: {
       type: String,
-      required: [true, "Please provide a password."],
-      minlength: [8, "Password must have atleast 8 characters."],
+      required: function () {
+        return !this.googleId;
+      }, // Only required if no Google ID
+      minlength: [8, "Password must have at least 8 characters."],
       select: false,
     },
   },
@@ -39,6 +46,7 @@ const userSchema = new mongoose.Schema(
 
 //DOCUMENT MIDDLEWARE: runs before .save() and .create()
 userSchema.pre("save", async function (next) {
+  if (!this.isModified("password") || !this.password) return next();
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });

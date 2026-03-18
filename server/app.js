@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
+const passport = require("passport");
 
+require("./config/passport");
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
 const blogRouter = require("./routes/blogRoutes");
@@ -25,6 +27,7 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: "4Mb" }));
 app.use(cookieParser());
 app.use(mongoSanitize());
+app.use(passport.initialize());
 
 //ROUTES
 app.use("/api/auth", authRouter);

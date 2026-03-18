@@ -131,4 +131,18 @@ const getProfile = (req, res) => {
   });
 };
 
-module.exports = { signUp, logIn, protect, restrictTo, logOut, getProfile };
+const googleAuthSuccess = (req, res) => {
+  generateAndSendToken(res, req.user._id); // comes from  return done(null, user);
+
+  res.redirect(`${process.env.FRONTEND_URL}/`);
+};
+
+module.exports = {
+  signUp,
+  logIn,
+  protect,
+  restrictTo,
+  logOut,
+  getProfile,
+  googleAuthSuccess,
+};

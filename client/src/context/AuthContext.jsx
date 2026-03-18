@@ -5,14 +5,18 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [auth, setAuth] = useState(null);
+  const [isInitialLoading, setIsInitialLoading] = useState(false);
 
   useEffect(() => {
     async function fetchProfile() {
       try {
+        setIsInitialLoading(true);
         const res = await axios.get("/auth/profile");
         setAuth(res.data.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsInitialLoading(false);
       }
     }
 
