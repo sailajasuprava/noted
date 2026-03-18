@@ -81,7 +81,7 @@ function Navbar() {
 
               {/* Modern White Dropdown */}
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 animate-in fade-in zoom-in duration-200">
+                <div className="absolute z-50 right-0 mt-3 w-64 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 animate-in fade-in zoom-in duration-200">
                   {/* User Info Header */}
                   <div className="px-6 py-5 bg-gray-50/50 border-b border-gray-100">
                     <p className="text-[#0c3f3f] font-bold text-base truncate">
@@ -122,7 +122,7 @@ function Navbar() {
               )}
             </div>
           ) : (
-            <>
+            <div className="flex gap-4">
               <NavLink to="/login">
                 <button className="px-5 py-2 rounded-full text-sm font-semibold border border-white/70 hover:bg-white/10 transition">
                   Log in
@@ -134,13 +134,13 @@ function Navbar() {
                   Sign Up
                 </button>
               </NavLink>
-            </>
+            </div>
           )}
         </div>
       </nav>
 
       {path === "/" && (
-        <div className="relative z-10 max-w-4xl mx-auto text-center pt-24 pb-32 px-6">
+        <div className="relative z-0 max-w-4xl mx-auto text-center pt-24 pb-32 px-6">
           <h1 className="text-6xl uppercase font-bold mb-8 tracking-tight">
             Tell Your Story To Everyone
           </h1>
