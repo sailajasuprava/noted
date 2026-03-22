@@ -4,6 +4,7 @@ import useLogout from "../../hooks/useLogout";
 import { useAuth } from "../../context/AuthContext";
 import { FaPenAlt, FaChevronDown } from "react-icons/fa";
 import { HiOutlinePencilAlt, HiOutlineLogout } from "react-icons/hi";
+import { MdDashboard } from "react-icons/md";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -35,11 +36,17 @@ function Navbar() {
   return (
     <section className="relative bg-gradient-to-br from-[#0c3f3f] via-[#117a7a] to-[#3ecdc4] text-white">
       <nav className="relative z-10 max-w-7xl mx-auto px-8 py-6 grid grid-cols-2 md:grid-cols-3  items-center">
-        <div className="justify-self-start flex items-center gap-2 text-2xl font-bold italic">
-          <span className="bg-white text-[#0c3f3f] px-1.5 py-1 rounded">
-            <FaPenAlt />
+        {/* Logo */}
+        <div className="justify-self-start flex items-center gap-2 text-2xl font-bold">
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-lg"
+            style={{ background: "linear-gradient(135deg,#3ecdc4,#117a7a)" }}
+          >
+            <FaPenAlt color="black" />
+          </div>
+          <span className="font-bold text-xl tracking-tight text-white">
+            Noted
           </span>
-          Noted
         </div>
 
         <div className="justify-self-center hidden md:flex gap-4 items-center text-sm font-medium">
@@ -94,6 +101,18 @@ function Navbar() {
 
                   {/* Menu Items */}
                   <div className="p-2">
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setDropdownOpen(false)}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-[#3ecdc4]/10 hover:text-[#0c3f3f] transition-colors group"
+                    >
+                      <MdDashboard
+                        size={20}
+                        className="text-gray-400 group-hover:text-[#0c3f3f]"
+                      />
+                      <span className="font-semibold text-sm">Dashboard</span>
+                    </Link>
+
                     <Link
                       to="/write"
                       onClick={() => setDropdownOpen(false)}
