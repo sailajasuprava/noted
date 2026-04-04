@@ -14,8 +14,8 @@ function Footer() {
             Noted
           </div>
           <p className="text-slate-500 text-sm leading-relaxed max-w-xs">
-            Innovative solutions for the future of digital payments and
-            financial management.
+            A platform designed to help you express your ideas, share
+            experiences, and inspire others.
           </p>
         </div>
 
@@ -23,19 +23,13 @@ function Footer() {
           <h4 className="font-bold mb-6 text-slate-800">Company</h4>
           <ul className="space-y-4 text-sm text-slate-500">
             <li>
-              <a href="#" className="hover:text-teal-600 transition">
-                About Us
-              </a>
+              <a className="hover:text-teal-600 transition">About Us</a>
             </li>
             <li>
-              <a href="#" className="hover:text-teal-600 transition">
-                Careers
-              </a>
+              <a className="hover:text-teal-600 transition">Careers</a>
             </li>
             <li>
-              <a href="#" className="hover:text-teal-600 transition">
-                Blog
-              </a>
+              <a className="hover:text-teal-600 transition">Blog</a>
             </li>
           </ul>
         </div>
@@ -44,19 +38,13 @@ function Footer() {
           <h4 className="font-bold mb-6 text-slate-800">Support</h4>
           <ul className="space-y-4 text-sm text-slate-500">
             <li>
-              <a href="#" className="hover:text-teal-600 transition">
-                Help Center
-              </a>
+              <a className="hover:text-teal-600 transition">Help Center</a>
             </li>
             <li>
-              <a href="#" className="hover:text-teal-600 transition">
-                FAQ
-              </a>
+              <a className="hover:text-teal-600 transition">FAQ</a>
             </li>
             <li>
-              <a href="#" className="hover:text-teal-600 transition">
-                Contact
-              </a>
+              <a className="hover:text-teal-600 transition">Contact</a>
             </li>
           </ul>
         </div>
@@ -75,12 +63,8 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-8 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between text-slate-400 text-xs">
         <p>© 2025 Peterdraw. All Rights Reserved.</p>
         <div className="flex gap-6 mt-4 md:mt-0">
-          <a href="#" className="hover:text-slate-600">
-            Privacy Policy
-          </a>
-          <a href="#" className="hover:text-slate-600">
-            Terms of Service
-          </a>
+          <a className="hover:text-slate-600">Privacy Policy</a>
+          <a className="hover:text-slate-600">Terms of Service</a>
         </div>
       </div>
     </footer>
