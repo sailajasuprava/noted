@@ -7,13 +7,13 @@ import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import CommentCard from "../../components/CommentCard";
 import { useAuth } from "../../context/AuthContext";
 import { GoComment } from "react-icons/go";
-import { PiSpeakerHighLight, PiSpinnerGapBold } from "react-icons/pi";
+// import { PiSpeakerHighLight, PiSpinnerGapBold } from "react-icons/pi";
 import {
-  FaRegPauseCircle,
-  FaRegStopCircle,
+  // FaRegPauseCircle,
+  // FaRegStopCircle,
   FaUserCircle,
 } from "react-icons/fa"; // Added FaUserCircle
-import { FaRegCirclePlay } from "react-icons/fa6";
+// import { FaRegCirclePlay } from "react-icons/fa6";
 import DOMPurify from "dompurify";
 
 function BlogDetails() {
@@ -154,133 +154,157 @@ function BlogDetails() {
       <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 sm:px-6 relative -mt-32 md:-mt-36 z-10 pb-20">
         <div className="bg-white shadow-xl  overflow-hidden p-6 md:p-12 lg:p-14">
           {/* Header Area */}
-          <div className="mb-12">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0c3f3f] leading-tight tracking-tight mb-8">
+          <header className="mb-6 border-b border-gray-300 pb-6">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[#3ecdc4] text-[10px] font-black uppercase tracking-[0.3em]">
+                {categoryName}
+              </span>
+              <span className="text-gray-300 text-[10px]">•</span>
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+                {publishedAt}
+              </span>
+            </div>
+
+            <h1 className="text-4xl capitalize md:text-6xl font-bold text-[#0c3f3f] leading-[1.1] tracking-tighter mb-6">
               {title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 text-gray-400 text-xs font-bold uppercase tracking-widest border-b border-gray-100 pb-8">
-              <span className="text-[#3ecdc4]">{categoryName}</span>
-              <span className="hidden sm:block">•</span>
-              <span>{publishedAt}</span>
-              <span className="hidden sm:block">•</span>
+
+            {/* Integrated Author & Audio Section */}
+            <div className="flex flex-wrap items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden border border-gray-100 bg-gray-50">
+                  {/* Replace with auth.avatar if available, otherwise FaUserCircle */}
+                  <img
+                    src={auth?.avatar}
+                    alt={fullname}
+                    className="w-full h-full object-cover grayscale"
+                  />
+                  <FaUserCircle className="text-gray-200 w-full h-full" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">
+                    Written By
+                  </p>
+                  <h4 className="text-[#0c3f3f] font-bold text-base leading-none">
+                    {fullname || "Guest Author"}
+                  </h4>
+                </div>
+              </div>
 
               {/* Audio Controls */}
-              <div className="flex items-center gap-3 bg-gray-50 px-4 py-1.5 rounded-full text-[#117a7a]">
+              {/* <div className="flex items-center gap-3 bg-gray-50 px-5 py-2 rounded-full text-[#117a7a] border border-gray-100">
                 {isSpeaking ? (
-                  <button onClick={handlePause}>
-                    <FaRegPauseCircle size={18} />
+                  <button
+                    onClick={handlePause}
+                    className="hover:scale-110 transition-transform"
+                  >
+                    <FaRegPauseCircle size={20} />
                   </button>
                 ) : (
-                  <button onClick={handleReadAloud}>
+                  <button
+                    onClick={handleReadAloud}
+                    className="hover:scale-110 transition-transform"
+                  >
                     {isPaused ? (
-                      <FaRegCirclePlay size={18} />
+                      <FaRegCirclePlay size={20} />
                     ) : (
-                      <PiSpeakerHighLight size={18} />
+                      <PiSpeakerHighLight size={20} />
                     )}
                   </button>
                 )}
-                <button onClick={handleStop} className="text-gray-300">
-                  <FaRegStopCircle size={18} />
+                <button
+                  onClick={handleStop}
+                  className="text-gray-300 hover:text-red-400 transition-colors"
+                >
+                  <FaRegStopCircle size={20} />
                 </button>
-                <span className="text-[10px] font-black ml-1">Listen</span>
+                <span className="text-[10px] font-black uppercase tracking-widest ml-1">
+                  Listen
+                </span>
+              </div> */}
+
+              <div className="px-5 py-2 flex items-center gap-8">
+                <button
+                  onClick={handleLike}
+                  className="flex items-center gap-2 group transition-all"
+                >
+                  {likes.includes(auth?._id) ? (
+                    <IoIosHeart
+                      size={24}
+                      fill="#ef4444"
+                      className="animate-pulse"
+                    />
+                  ) : (
+                    <IoIosHeartEmpty
+                      size={24}
+                      className="text-gray-400 group-hover:text-red-400"
+                    />
+                  )}
+                  <span className="font-black text-[#0c3f3f] text-sm uppercase tracking-widest">
+                    {numOfLikes} Likes
+                  </span>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <GoComment size={22} className="text-gray-400" />
+                  <span className="font-black text-[#0c3f3f] text-sm uppercase tracking-widest">
+                    {comments?.length} Comments
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </header>
 
           {/* Main Layout: Sidebar + Article */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-            {/* Sidebar (Updated Author Card) */}
-            <aside className="lg:col-span-4">
-              <div className="bg-[#f8fdfe] border border-gray-100 rounded-lg p-7 shadow-sm sticky top-8">
-                {/* Avatar with Status Dot */}
-                <div className="relative mb-6">
-                  <FaUserCircle className="text-gray-200 text-7xl" />
-                  <span className="absolute bottom-1 left-12 w-4 h-4 bg-[#3ecdc4] border-2 border-white rounded-full"></span>
-                </div>
+          <main className="max-w-5xl mx-auto">
+            <article className="prose prose-slate lg:prose-xl max-w-none text-gray-600 leading-relaxed font-serif">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(content),
+                }}
+              />
+            </article>
 
-                <div className="mb-6">
-                  <h4 className="text-[#0c3f3f] font-extrabold text-xl tracking-tight">
-                    {fullname || "test1"}
-                  </h4>
-                  <p className="text-gray-400 text-sm font-medium">Author</p>
-                </div>
+            {/* Post-Article Interaction Bar */}
 
-                <button className="w-full py-3.5 bg-gradient-to-r from-[#47d7cf] to-[#168a8a] text-white text-xs font-black rounded-2xl hover:brightness-110 transition-all uppercase tracking-widest shadow-lg shadow-teal-100 mb-6">
-                  Follow Author
-                </button>
-
-                <div className="flex gap-6 pt-5 border-t border-gray-100">
-                  <button
-                    onClick={handleLike}
-                    className="flex items-center gap-2 group"
-                  >
-                    {likes.includes(auth?._id) ? (
-                      <IoIosHeart size={20} fill="#ef4444" />
-                    ) : (
-                      <IoIosHeartEmpty
-                        size={20}
-                        className="text-gray-400 group-hover:text-red-400"
-                      />
-                    )}
-                    <span className="font-bold text-gray-500 text-sm">
-                      {numOfLikes}
-                    </span>
-                  </button>
-                  <div className="flex items-center gap-2">
-                    <GoComment size={18} className="text-gray-400" />
-                    <span className="font-bold text-gray-500 text-sm">
-                      {comments?.length}
-                    </span>
-                  </div>
-                </div>
+            {/* Comment Section */}
+            <section className="border-t border-gray-100 pt-16">
+              <div className="flex items-center gap-3 mb-10">
+                <h3 className="text-xl font-bold text-[#0c3f3f]">Comments</h3>
+                <span className="bg-[#3ecdc4]/20 text-[#0c3f3f] px-3 py-0.5 rounded-full text-xs font-bold">
+                  {comments.length}
+                </span>
               </div>
-            </aside>
 
-            {/* Article Content */}
-            <main className="lg:col-span-8">
-              <article className="prose prose-slate max-w-none text-gray-600 leading-relaxed text-lg">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(content),
-                  }}
+              {/* Refined Input Area (Reference: Skill Sprout Style) */}
+              <form
+                className="bg-gray-50 rounded-2xl p-4 mb-16 border border-gray-100 shadow-sm"
+                onSubmit={handleCommentSubmit}
+              >
+                <textarea
+                  placeholder="Add comment..."
+                  className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 text-gray-700 resize-none min-h-[80px] text-base placeholder:text-gray-400"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
                 />
-              </article>
-
-              {/* Comment Section */}
-              <div className="mt-16 pt-12 border-t border-gray-100">
-                <h3 className="text-xl font-extrabold text-[#0c3f3f] mb-8">
-                  Comments ({comments.length})
-                </h3>
-
-                <form
-                  className="bg-gray-50 rounded-2xl p-5 mb-10 border border-gray-100"
-                  onSubmit={handleCommentSubmit}
-                >
-                  <textarea
-                    placeholder="Share your thoughts..."
-                    className="w-full bg-transparent border-none focus:ring-0 text-gray-700 resize-none min-h-[100px]"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                  />
-                  <div className="flex justify-end mt-2">
-                    <button className="bg-[#0c3f3f] text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-[#117a7a] transition-all">
-                      {isLoading ? (
-                        <PiSpinnerGapBold className="animate-spin" />
-                      ) : (
-                        "Submit"
-                      )}
-                    </button>
-                  </div>
-                </form>
-
-                <div className="space-y-4">
-                  {comments.map((item, i) => (
-                    <CommentCard key={i} item={item} />
-                  ))}
+                <div className="flex justify-end">
+                  <button
+                    disabled={isLoading}
+                    className="bg-gradient-to-br from-[#0c3f3f] via-[#117a7a] to-[#3ecdc4] text-white px-8 py-2.5 rounded-full text-sm font-bold hover:brightness-110 transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-md shadow-teal-900/10"
+                  >
+                    {isLoading ? "Posting..." : "Submit"}
+                  </button>
                 </div>
+              </form>
+
+              {/* Comments List */}
+              <div className="space-y-1">
+                {comments.map((item, i) => (
+                  <CommentCard key={i} item={item} />
+                ))}
               </div>
-            </main>
-          </div>
+            </section>
+          </main>
         </div>
       </div>
     </div>
