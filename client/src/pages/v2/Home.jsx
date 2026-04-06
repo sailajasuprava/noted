@@ -34,7 +34,7 @@ const Home = () => {
 
   if (isLoading) return <Spinner />;
 
-  if (blogs.length !== 0)
+  if (blogs.length === 0)
     return (
       <p className="text-gray-600 text-center font-semibold max-w-7xl mx-auto px-6 py-16">
         No blogs found.
