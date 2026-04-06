@@ -175,11 +175,7 @@ function CreateBlog() {
             className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#0c3f3f] to-[#117a7a] text-white font-bold hover:shadow-lg hover:shadow-[#117a7a]/20 transition-all active:scale-[0.98] disabled:opacity-50"
             disabled={isLoading}
           >
-            {isLoading ? (
-              <PiSpinnerGapBold size={24} className="animate-spin" />
-            ) : (
-              "Publish Post"
-            )}
+            {isLoading ? "Publishing..." : "Publish Post"}
           </button>
         </form>
       </div>

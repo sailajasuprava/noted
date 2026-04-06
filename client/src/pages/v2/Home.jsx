@@ -16,6 +16,7 @@ const Home = () => {
     categories,
     activeCategory,
     setActiveCategory,
+    isLoading,
   } = useBlog();
 
   useEffect(() => {
@@ -30,7 +31,15 @@ const Home = () => {
   }, [search]);
 
   const totalPages = hasMore ? page + 1 : page;
-  if (!blogs.length) return <Spinner />;
+
+  if (isLoading) return <Spinner />;
+
+  if (blogs.length !== 0)
+    return (
+      <p className="text-gray-600 text-center font-semibold max-w-7xl mx-auto px-6 py-16">
+        No blogs found.
+      </p>
+    );
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
