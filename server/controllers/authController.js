@@ -8,9 +8,14 @@ const generateAndSendToken = (res, id) => {
   const token = jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
+
+  const isProduction = process.env.NODE_ENV === "production";
+
   res.cookie(process.env.COOKIE_NAME, token, {
     maxAge: process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     httpOnly: true,
+    sameSite: isProduction ? "None" : "Lax",
+    secure: isProduction,
   });
 };
 

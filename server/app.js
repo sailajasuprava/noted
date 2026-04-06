@@ -15,7 +15,7 @@ const globalErrorHandler = require("./controllers/errorController");
 const AppError = require("./utils/appArror");
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: process.env.FRONTEND_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
@@ -35,6 +35,11 @@ app.use("/api/users", userRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/comments", commentRouter);
+
+//HEALTH CHECK
+app.get("/", (req, res) => {
+  res.json({ message: "Server is running..." });
+});
 
 //CUSTOM ERROR MESSAGE FOR UNHANDLED ROUTES
 app.all("*", (req, res, next) => {
