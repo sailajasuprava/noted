@@ -6,6 +6,7 @@ import AppLayout from "./components/AppLayout";
 import { useAuth } from "./context/AuthContext";
 import About from "./pages/v2/About";
 import Dashboard from "./pages/v2/Dashboard";
+import LoadingFallback from "./components/v2/LoadingFallback";
 
 // Lazy-loaded pages
 const Signup = lazy(() => import("./pages/v2/Signup"));
@@ -22,7 +23,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       {/* Suspense fallback UI */}
-      <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
+      <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<Home />} />
