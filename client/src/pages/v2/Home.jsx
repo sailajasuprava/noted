@@ -30,16 +30,7 @@ const Home = () => {
     }
   }, [search]);
 
-  const totalPages = hasMore ? page + 1 : page;
-
-  if (isLoading) return <Spinner />;
-
-  if (blogs.length === 0)
-    return (
-      <p className="text-gray-600 text-center font-semibold max-w-7xl mx-auto px-6 py-16">
-        No blogs found.
-      </p>
-    );
+  // const totalPages = hasMore ? page + 1 : page;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
@@ -110,44 +101,58 @@ const Home = () => {
         </div>
 
         {/* --- ARTICLE GRID --- */}
-        <section className="max-w-6xl mx-auto px-6 pb-12 bg-white">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
-            {blogs.map((blog) => (
-              <BlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
+        <section className="max-w-6xl mx-auto px-6 pb-12 bg-white min-h-[400px]">
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <Spinner />
+            </div>
+          ) : blogs.length === 0 ? (
+            <p className="text-gray-600 text-center font-semibold py-16">
+              No blogs found.
+            </p>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+                {blogs.map((blog) => (
+                  <BlogCard key={blog.id} blog={blog} />
+                ))}
+              </div>
 
-          {/* --- PAGINATION --- */}
-          <div className="mt-20 flex justify-center items-center gap-3">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((prev) => prev - 1)}
-            >
-              Prev
-            </button>
-            {Array.from(
-              { length: hasMore ? page + 1 : page },
-              (_, i) => i + 1,
-            ).map((n) => (
-              <button
-                key={n}
-                onClick={() => setPage(n)}
-                className={`w-12 h-12 flex items-center justify-center font-black text-sm transition-all border-2 ${
-                  n === page
-                    ? "bg-black text-white border-black"
-                    : "bg-white text-slate-400 border-slate-100 hover:border-black hover:text-black"
-                }`}
-              >
-                {String(n).padStart(2, "0")}
-              </button>
-            ))}
-            <button
-              disabled={!hasMore}
-              onClick={() => setPage((prev) => prev + 1)}
-            >
-              Next
-            </button>
-          </div>
+              {/* --- PAGINATION --- */}
+              <div className="mt-20 flex justify-center items-center gap-3">
+                <button
+                  disabled={page === 1}
+                  className="disabled:opacity-30"
+                  onClick={() => setPage((prev) => prev - 1)}
+                >
+                  Prev
+                </button>
+                {Array.from(
+                  { length: hasMore ? page + 1 : page },
+                  (_, i) => i + 1,
+                ).map((n) => (
+                  <button
+                    key={n}
+                    onClick={() => setPage(n)}
+                    className={`w-12 h-12 flex items-center justify-center font-black text-sm transition-all border-2 ${
+                      n === page
+                        ? "bg-black text-white border-black"
+                        : "bg-white text-slate-400 border-slate-100 hover:border-black hover:text-black"
+                    }`}
+                  >
+                    {String(n).padStart(2, "0")}
+                  </button>
+                ))}
+                <button
+                  disabled={!hasMore}
+                  className="disabled:opacity-30"
+                  onClick={() => setPage((prev) => prev + 1)}
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          )}
         </section>
       </section>
     </div>
